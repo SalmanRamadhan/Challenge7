@@ -1,4 +1,4 @@
-t inipackage com.example.challenge7
+package com.example.challenge7
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
