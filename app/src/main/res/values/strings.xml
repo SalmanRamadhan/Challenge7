@@ -5,4 +5,8 @@
     <string name="menu_title_1">Profile</string>
     <string name="menu_title_2">Home</string>
     <string name="menu_title_3">History</string>
+    <string name="hint_username">User Name</string>
+    <string name="hint_email">UserName@gmail.com</string>
+    <string name="button_update">Update</string>
+    <string name="buttton_logout">Logout</string>
 </resources>

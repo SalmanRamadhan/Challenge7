@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.challenge7.R
 import com.example.challenge7.databinding.ActivityMenuBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MenuActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding?.root)
         actionBar?.hide()
 
-        binding?.btmNavBarMenu?.setOnItemSelectedListener {
+        binding?.bnvMenu?.setOnItemSelectedListener {
 
             when(it.itemId) {
                 R.id.menu_1 -> {
@@ -42,7 +42,7 @@ class MenuActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment){
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.fragment_container,fragment)
+        fragmentTransaction.add(R.id.fcvContainer,fragment)
         fragmentTransaction.commit()
 
     }

@@ -8,6 +8,7 @@
     tools:context=".menu.HistoryFragment">
 
     <View
+        android:id="@+id/viewTest"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/secondarycolor"
@@ -20,11 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/menu_title_1"
+        android:text="@string/menu_title_3"
         android:textColor="@color/option2color"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
