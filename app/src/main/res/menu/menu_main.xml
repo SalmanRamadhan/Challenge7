@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_1"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/menu_title_1"
+        />
+
+    <item
+        android:id="@+id/menu_2"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/menu_title_2"
+        />
+
+    <item
+        android:id="@+id/menu_3"
+        android:enabled="true"
+        android:icon="@drawable/ic_history"
+        android:title="@string/menu_title_3"
+        />
+
+</menu>
