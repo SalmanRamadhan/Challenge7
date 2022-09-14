@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".landingpage.LandingFragment3">
+    tools:context=".landingpage.LandingFragment3"
+    android:background="@color/maincolor">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:src="@drawable/ic_background"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="77dp" />
 
-</FrameLayout>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_landingpage_3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:id="@+id/ivLandingPage3"/>
+
+    <TextView
+        android:id="@+id/tvLandingPage2Tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivLandingPage3"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/titillium_web_bold"
+        android:shadowColor="@color/shadow"
+        android:shadowDx="0"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/vs_com"
+        android:textColor="@color/secondarycolor"
+        android:textSize="46sp" />
+
+    <TextView
+        android:id="@+id/tvlandingpage3Text"
+        android:layout_width="255dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/tvLandingPage2Tittle"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
+        android:fontFamily="@font/titillium_web_regular"
+        android:text="@string/landingpage3_text"
+        android:textAlignment="center"
+        android:textColor="@color/option2color"
+        android:textSize="20sp"
+        android:shadowColor="@color/shadow"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="1"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="131dp"
+        android:layout_height="43dp"
+        android:layout_below="@id/tvlandingpage3Text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/titillium_web_bold"
+        android:text="@string/login"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:paddingBottom="5dp"
+        android:textColor="@color/maincolor"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/optioncolor"
+        android:text="@string/sign_up"
+        android:fontFamily="@font/titillium_web_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btnLogin"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvSignUp"
+        android:shadowDy="8"
+        android:shadowColor="@color/shadow"
+        android:shadowRadius="1"/>
+
+
+</RelativeLayout>

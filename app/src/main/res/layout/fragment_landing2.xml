@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".landingpage.LandingFragment2">
+    tools:context=".landingpage.LandingFragment2"
+    android:background="@color/maincolor">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:src="@drawable/ic_background"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="77dp" />
 
-</FrameLayout>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_landingpage_2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:id="@+id/ivLandingPage2"/>
+
+    <TextView
+        android:id="@+id/tvLandingPage2Tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivLandingPage2"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/titillium_web_bold"
+        android:shadowColor="@color/shadow"
+        android:shadowDx="0"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/vs_player"
+        android:textColor="@color/secondarycolor"
+        android:textSize="46sp" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLandingPage2Tittle"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="180dp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:text="@string/landingpage2_text"
+        android:textAlignment="center"
+        android:textColor="@color/option2color"
+        android:textSize="20sp"
+        android:shadowColor="@color/shadow"
+        android:shadowDx="0"
+        android:shadowDy="5"
+        android:shadowRadius="1"/>
+
+</RelativeLayout>

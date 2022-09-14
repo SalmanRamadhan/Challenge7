@@ -9,4 +9,15 @@
     <string name="hint_email">UserName@gmail.com</string>
     <string name="button_update">Update</string>
     <string name="buttton_logout">Logout</string>
+    <string name="jan">JAN</string>
+    <string name="ken">KEN</string>
+    <string name="pon">PON</string>
+    <string name="jankenpon">JANKENPON!!</string>
+    <string name="landingpage1_text">Cara memainkan Janken sangat mirip dengan cara memainkan Batu-Gunting-Kertas yang biasa kalian mainkan</string>
+    <string name="vs_player">VS PLAYER</string>
+    <string name="landingpage2_text">Dapat ddimainkan dengan mode VS Player.</string>
+    <string name="vs_com">VS COM</string>
+    <string name="landingpage3_text">Dapat dimainkan juga dengan mode VS COM</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
