@@ -20,4 +20,7 @@
     <string name="landingpage3_text">Dapat dimainkan juga dengan mode VS COM</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
+    <string name="checkbox_pilih_semua">Pilih semua</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

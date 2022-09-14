@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/titillium_web_bold"
+        android:textColor="@color/secondarycolor"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Senin 29, Agu 2022" />
+
+    <CheckBox
+        android:id="@+id/cbDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:buttonTint="@color/secondarycolor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDate" />
+
+    <ImageView
+        android:id="@+id/ivHistory"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_history"
+        app:layout_constraintBottom_toBottomOf="@id/cbDelete"
+        app:layout_constraintStart_toEndOf="@id/cbDelete"
+        app:layout_constraintTop_toTopOf="@id/cbDelete" />
+
+    <TextView
+        android:id="@+id/tvHasilPermainan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/titillium_web_bold"
+        android:text="Hasil Permainan"
+        android:textColor="@color/secondarycolor"
+        app:layout_constraintBottom_toBottomOf="@id/ivHistory"
+        app:layout_constraintStart_toEndOf="@id/ivHistory"
+        app:layout_constraintTop_toTopOf="@+id/ivHistory" />
+
+    <TextView
+        android:id="@+id/tvHasilPermainan2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:text="Hasil Permainan"
+        android:textColor="@color/secondarycolor"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/tvHasilPermainan"
+        app:layout_constraintTop_toBottomOf="@id/tvHasilPermainan" />
+
+    <TextView
+        android:id="@+id/tvHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/titillium_web_regular"
+        android:textColor="@color/secondarycolor"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/tvHasilPermainan2"
+        app:layout_constraintTop_toBottomOf="@id/tvHasilPermainan2"
+        tools:text="11:09:44" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

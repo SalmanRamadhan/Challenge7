@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/titillium_web_regular"
         android:text="@string/menu_title_3"
         android:textColor="@color/option2color"
         android:textSize="28sp"
@@ -37,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llDeleteAll"
+        android:id="@+id/clDeleteAll"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -53,15 +54,16 @@
             android:buttonTint="@color/secondarycolor"
             android:scaleX="1"
             android:scaleY="1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvPilihSemua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pilih semua"
+            android:fontFamily="@font/titillium_web_regular"
+            android:text="@string/checkbox_pilih_semua"
             android:textColor="@color/secondarycolor"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -72,12 +74,13 @@
             android:id="@+id/tvDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/titillium_web_regular"
+            android:text="@string/button_delete"
             android:textColor="@color/secondarycolor"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvCancel"
-            android:layout_marginEnd="20dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -85,15 +88,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Cancel"
+            android:fontFamily="@font/titillium_web_regular"
+            android:text="@string/button_cancel"
             android:textColor="@color/secondarycolor"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1.7dp"
+        android:background="@color/secondarycolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clDeleteAll" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vSeparator"
+        tools:itemCount="9"
+        tools:listitem="@layout/item_history"
+        tools:orientation="vertical"
+        tools:scrollbars="vertical" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

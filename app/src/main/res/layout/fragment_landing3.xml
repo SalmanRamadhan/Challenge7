@@ -45,14 +45,14 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom|center"
         android:fontFamily="@font/titillium_web_regular"
-        android:text="@string/landingpage3_text"
-        android:textAlignment="center"
-        android:textColor="@color/option2color"
-        android:textSize="20sp"
         android:shadowColor="@color/shadow"
         android:shadowDx="0"
         android:shadowDy="5"
-        android:shadowRadius="1"/>
+        android:shadowRadius="1"
+        android:text="@string/landingpage3_text"
+        android:textAlignment="center"
+        android:textColor="@color/option2color"
+        android:textSize="20sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
