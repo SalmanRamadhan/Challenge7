@@ -13,7 +13,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "SERVER_URL", "\"https://binar-gdd-cc8.herokuapp.com/api/v1/\""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,7 +50,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation 'me.relex:circleindicator:2.1.6'
-    implementation 'com.tbuonomo:dotsindicator:4.2'
+    implementation("com.tbuonomo:dotsindicator:4.3")
+
+    implementation 'com.google.code.gson:gson:2.9.1'
+
+    //Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 
     /*implementation("androidx.room:room-runtime:2.4.3")

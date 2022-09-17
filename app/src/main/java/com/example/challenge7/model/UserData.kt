@@ -1,8 +1,9 @@
 package com.example.challenge7.model
 
 data class UserData(
-    var _id: String,
+    val _id: String,
+    var username: String,
     var email: String,
-    var photo: String,
-    var username: String
+    val token: String,
+    var photo: String = ""
 )
