@@ -24,4 +24,12 @@
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
     <string name="refresh">Refresh</string>
+    <string name="hi_user_name_default">Hi, User Name</string>
+    <string name="pilih_lawanmu_home">PILIH LAWANMU</string>
+    <string name="user_name_vs_player">User Name  VS  Player</string>
+    <string name="vs_player_menu">VS Player</string>
+    <string name="user_name_vs_player_menu">User Name VS Player</string>
+    <string name="user_name_vs_cpu">User Name VS CPU</string>
+    <string name="setting_menu_pop_up">Setting</string>
+    <string name="logout_menu_pop_up">Logout</string>
 </resources>
