@@ -4,26 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".landingpage.LandingPage">
+    tools:context=".landingpage.LandingPage"
+    android:background="@color/maincolor">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/vpLandingPage"
-        android:layout_above="@id/dot_indicator"/>
+        android:layout_above="@id/dotIndicator"/>
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dotIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dot_indicator"
-        app:dotsColor="@color/option2color"
-        android:layout_alignParentBottom="true"
+        app:dotsColor="@color/optioncolor"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:selectedDotColor="@color/optioncolor"
+        app:progressMode="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        app:selectedDotColor="@color/option2color"
-        app:dotsSize="20dp"
-        app:dotsSpacing="5dp"
-        app:progressMode="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp" />
 
 
 </RelativeLayout>

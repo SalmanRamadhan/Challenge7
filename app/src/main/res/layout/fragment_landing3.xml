@@ -60,30 +60,29 @@
         android:layout_height="43dp"
         android:layout_below="@id/tvlandingpage3Text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:background="@drawable/button"
+        android:elevation="4dp"
         android:fontFamily="@font/titillium_web_bold"
-        android:text="@string/login"
-        android:textSize="20sp"
-        android:textAllCaps="false"
         android:paddingBottom="5dp"
+        android:text="@string/login"
+        android:textAllCaps="false"
         android:textColor="@color/maincolor"
-        android:elevation="4dp"/>
+        android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/tvSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/optioncolor"
-        android:text="@string/sign_up"
-        android:fontFamily="@font/titillium_web_bold"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:id="@+id/tvSignUp"
-        android:shadowDy="8"
+        android:fontFamily="@font/titillium_web_bold"
         android:shadowColor="@color/shadow"
-        android:shadowRadius="1"/>
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/sign_up"
+        android:textColor="@color/optioncolor"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

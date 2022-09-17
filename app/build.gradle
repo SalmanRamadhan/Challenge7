@@ -50,7 +50,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation 'me.relex:circleindicator:2.1.6'
-    implementation 'com.tbuonomo:dotsindicator:4.2'
+    implementation("com.tbuonomo:dotsindicator:4.3")
 
 
     /*implementation("androidx.room:room-runtime:2.4.3")
