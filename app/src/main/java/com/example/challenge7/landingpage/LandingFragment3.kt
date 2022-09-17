@@ -23,7 +23,6 @@ class LandingFragment3 : Fragment() {
                     val login = Intent (context, LoginActivity::class.java)
                     startActivity(login)
                 }
-
             }
 
             tvSignUp.setOnClickListener {

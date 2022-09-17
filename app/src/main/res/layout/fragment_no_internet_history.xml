@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/maincolor"
+    tools:context=".menu.MenuActivity"
+    android:orientation="vertical"
+    android:id="@+id/rlNoInternetHistory">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_no_internet"
+        android:layout_centerInParent="true"
+        android:id="@+id/ivNoInternet"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/refresh"
+        android:textSize="21sp"
+        android:fontFamily="@font/titillium_web_bold"
+        android:background="@drawable/button_rounded"
+        android:textColor="@color/maincolor"
+        android:layout_below="@id/ivNoInternet"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>
