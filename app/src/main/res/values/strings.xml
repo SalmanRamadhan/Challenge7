@@ -26,4 +26,5 @@
     <string name="email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_re_password">Re Entry Password</string>
+    <string name="refresh">Refresh</string>
 </resources>
