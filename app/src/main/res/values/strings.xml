@@ -23,4 +23,7 @@
     <string name="checkbox_pilih_semua">Pilih semua</string>
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
+    <string name="email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_re_password">Re Entry Password</string>
 </resources>
