@@ -23,4 +23,5 @@
     <string name="checkbox_pilih_semua">Pilih semua</string>
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
+    <string name="refresh">Refresh</string>
 </resources>
