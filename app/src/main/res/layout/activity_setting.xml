@@ -46,17 +46,16 @@
         android:layout_marginTop="50dp"
         android:background="@color/setting_bar">
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                app:track="@drawable/bg_track"
-                android:thumb="@drawable/thumb"
-                android:checked="true"/>
 
-
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="30dp"
+            android:checked="true"
+            android:thumb="@drawable/thumb"
+            app:track="@drawable/bg_track" />
 
         <ImageView
             android:id="@+id/ivSound"
