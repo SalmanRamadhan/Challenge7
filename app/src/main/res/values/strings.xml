@@ -27,4 +27,19 @@
     <string name="hint_password">Password</string>
     <string name="hint_re_password">Re Entry Password</string>
     <string name="refresh">Refresh</string>
+    <string name="hi_user_name_default">Hi, User Name</string>
+    <string name="pilih_lawanmu_home">PILIH LAWANMU</string>
+    <string name="user_name_vs_player">User Name  VS  Player</string>
+    <string name="vs_player_menu">VS Player</string>
+    <string name="user_name_vs_player_menu">User Name VS Player</string>
+    <string name="user_name_vs_cpu">User Name VS CPU</string>
+    <string name="setting_menu_pop_up">Setting</string>
+    <string name="logout_menu_pop_up">Logout</string>
+    <string name="history">History</string>
+    <string name="setting">Setting</string>
+    <string name="sound">Sound</string>
+    <string name="game_round">Game Round</string>
+    <string name="input_number_max_5_round">Input Number Max 5 Round</string>
+    <string name="save">Save</string>
+    <string name="home">Home</string>
 </resources>

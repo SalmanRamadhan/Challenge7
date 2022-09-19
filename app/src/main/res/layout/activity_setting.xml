@@ -1,9 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setting.SettingActivity">
+    tools:context=".setting.SettingActivity"
+    android:background="@color/maincolor">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/viewTest"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/secondarycolor"
+        android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:id="@+id/ivArrowBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/ic_arrow_back"
+        app:tint="@color/option2color" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/setting"
+        android:textColor="@color/option2color"
+        android:textSize="28sp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:layout_toEndOf="@id/ivArrowBack"/>
+
+    <RelativeLayout
+        android:id="@+id/viewSoundbar"
+        android:layout_width="311dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/viewTest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@color/setting_bar">
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="30dp"
+            android:checked="true"
+            android:thumb="@drawable/thumb"
+            app:track="@drawable/bg_track" />
+
+        <ImageView
+            android:id="@+id/ivSound"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_sound"
+            app:tint="@color/item_setting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ivSound"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/titillium_web_regular"
+            android:text="@string/sound"
+            android:textColor="@color/option2color"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/viewGameRound"
+        android:layout_width="311dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/viewSoundbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@color/setting_bar">
+
+        <ImageView
+            android:id="@+id/ivGameStick"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_game_stick"
+            app:tint="@color/item_setting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ivGameStick"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="38dp"
+            android:fontFamily="@font/titillium_web_regular"
+            android:text="@string/game_round"
+            android:textColor="@color/option2color"
+            android:textSize="14sp" />
+
+        <EditText
+            android:layout_width="206dp"
+            android:layout_height="41dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_colum_input"
+            android:hint="@string/input_number_max_5_round"
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:textColorHint="@color/option2color" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="131dp"
+        android:layout_height="43dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/option2color"
+        android:text="@string/save"
+        android:textColor="@color/maincolor"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:textFontWeight="600"
+        tools:ignore="UnusedAttribute"
+        android:id="@+id/btnSave"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnHome"
+        android:layout_width="131dp"
+        android:layout_height="43dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/option2color"
+        android:text="@string/home"
+        android:textColor="@color/maincolor"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:textFontWeight="600"
+        tools:ignore="UnusedAttribute"
+        android:layout_alignTop="@id/btnSave"
+        android:layout_marginTop="60dp"/>
+
+
+
+</RelativeLayout>
