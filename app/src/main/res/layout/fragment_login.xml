@@ -108,7 +108,7 @@
         android:paddingStart="16dp"
         android:background="@drawable/edit_text_rounded"
         android:hint="@string/hint_password"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:textColorHint="@color/secondarycolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
