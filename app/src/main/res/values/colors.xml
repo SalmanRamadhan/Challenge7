@@ -9,7 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="shadow">#33484848</color>
     <color name="maincolor">#AC7088</color>
+    <color name="item_setting">#763333</color>
     <color name="secondarycolor">#DEB6AB</color>
+    <color name="setting_bar">#A8DEB6AB</color>
     <color name="optioncolor">#ECCCB2</color>
     <color name="option2color">#F5E8C7</color>
     <color name="option3color">#8E8E8E</color>

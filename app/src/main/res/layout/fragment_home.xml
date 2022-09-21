@@ -1,16 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.HomeFragment"
-    android:background="@color/maincolor">
+    android:background="@color/maincolor"
+    tools:context=".menu.HomeFragment">
 
- <ImageView
-     android:layout_width="100dp"
-     android:layout_height="100dp"
-     android:id="@+id/ivImageLogo"
-     android:src="@drawable/ic_logo"/>
+    <ImageView
+        android:id="@+id/ivSmallLogo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="27dp"
+        android:src="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/Jan"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/ivSmallLogo"
+        android:fontFamily="@font/titillium_web_bold"
+        android:gravity="top"
+        android:text="@string/jan"
+        android:textColor="@color/optioncolor"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/ken"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/Jan"
+        android:fontFamily="@font/titillium_web_bold"
+        android:gravity="top"
+        android:text="@string/ken"
+        android:textColor="@color/optioncolor"
+        android:textSize="20sp"
+        android:layout_toEndOf="@id/ivSmallLogo"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="37dp"/>
+
+    <TextView
+        android:id="@+id/pon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/ken"
+        android:fontFamily="@font/titillium_web_bold"
+        android:text="@string/pon"
+        android:textColor="@color/optioncolor"
+        android:textSize="20sp"
+        android:layout_toEndOf="@id/ivSmallLogo"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="59dp"/>
+
+    <ImageView
+        android:id="@+id/ivOpenPopMenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:layout_toEndOf="@id/pon"
+        android:src="@drawable/ic_arrow_down"
+        app:tint="@color/optioncolor" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="43dp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:text="@string/hi_user_name_default"
+        android:textColor="@color/optioncolor"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/ivImageProfileUser"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@id/tvUserName"
+        android:src="@drawable/ic_image_profile" />
+
+    <TextView
+        android:id="@+id/tvMenuTittle"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/titillium_web_bold"
+        android:shadowColor="@color/shadow"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/pilih_lawanmu_home"
+        android:textColor="@color/optioncolor"
+        android:textSize="32sp" />
+
+        <ImageView
+            android:id="@+id/ivPlayerVsPlayer"
+            android:layout_width="235dp"
+            android:layout_height="205dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_landingpage_2"
+            android:layout_alignTop="@id/tvMenuTittle"
+            android:layout_marginTop="50dp"/>
 
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvUserNameVsPlayer"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/ivPlayerVsPlayer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/titillium_web_regular"
+        android:text="@string/user_name_vs_player_menu"
+        android:textColor="@color/optioncolor"
+        android:textSize="24sp"
+        android:gravity="center_horizontal"/>
+
+    <ImageView
+        android:layout_width="235dp"
+        android:layout_height="205dp"
+        android:id="@+id/ivPlayerVsCpu"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_landingpage_3"
+        android:layout_alignTop="@id/tvUserNameVsPlayer"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:id="@+id/tvUserNameVsCpu"
+        android:text="@string/user_name_vs_cpu"
+        android:fontFamily="@font/titillium_web_regular"
+        android:textColor="@color/optioncolor"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_alignTop="@id/ivPlayerVsCpu"
+        android:layout_marginTop="160dp"/>
+
+
+</RelativeLayout>
