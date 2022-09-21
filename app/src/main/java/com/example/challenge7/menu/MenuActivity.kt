@@ -2,6 +2,7 @@ package com.example.challenge7.menu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.example.challenge7.R
 import com.example.challenge7.databinding.ActivityMenuBinding
@@ -16,6 +17,8 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         actionBar?.hide()
+
+
 
         binding?.bnvMenu?.setOnItemSelectedListener {
 
