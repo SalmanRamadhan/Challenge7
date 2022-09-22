@@ -42,4 +42,7 @@
     <string name="input_number_max_5_round">Input Number Max 5 Round</string>
     <string name="save">Save</string>
     <string name="home">Home</string>
+    <string name="result_menang">MENANG</string>
+    <string name="result_seri">Seri!</string>
+    <string name="result_com">COM</string>
 </resources>

@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/ivRestart"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="8dp"
@@ -82,13 +83,26 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:id="@+id/ivVs"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:src="@drawable/ic_vs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/titillium_web_bold"
+        android:text="Username Silahkan pilih"
+        android:textColor="@color/secondarycolor"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivVs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPlayer"
@@ -129,18 +143,21 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
+            android:id="@+id/ivBatu"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_batu" />
 
         <ImageView
+            android:id="@+id/ivKertas"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_kertas" />
 
         <ImageView
+            android:id="@+id/ivGunting"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
