@@ -37,6 +37,8 @@ class AgainstComActivity : AppCompatActivity() {
         binding = ActivityAgainstComBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
+
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstComActivity, MenuActivity::class.java)
             startActivity(backToMenu)
@@ -46,6 +48,12 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.pbPlayer?.progress = maxRound
         binding?.pbCOM?.max = maxRound
         binding?.pbPlayer?.max = maxRound
+
+        binding?.tvChoice?.setOnClickListener {
+            if(binding?.tvChoice?.text == getString(R.string.choice_rematch)){
+                reset()
+            }
+        }
 
         binding?.ivRestart?.setOnClickListener {
             reset()
@@ -73,7 +81,7 @@ class AgainstComActivity : AppCompatActivity() {
     fun reset() {
 
 
-
+        binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
         binding?.pbCOM?.progress = maxRound
         binding?.pbPlayer?.progress = maxRound
         binding?.pbCOM?.max = maxRound
@@ -140,6 +148,8 @@ class AgainstComActivity : AppCompatActivity() {
     }
 
     private fun showDialogResult() {
+        binding?.tvChoice?.text = getString(R.string.choice_rematch)
+
         isPlay = true
         val dialog = ResultDialog(
             when {

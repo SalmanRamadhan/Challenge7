@@ -45,4 +45,6 @@
     <string name="result_menang">MENANG</string>
     <string name="result_seri">Seri!</string>
     <string name="result_com">COM</string>
+    <string name="choice_rematch">Rematch?</string>
+    <string name="choice_silahkan">%1$s Silahkan Pilih</string>
 </resources>
