@@ -19,10 +19,8 @@ class HistoryAdapter:RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val history = listHistory[position]
         holder.tvHasilPermainan.text = history.hasilPermainan
-        holder.tvHasilPermainan2.text = history.hasilPermainan2
         holder.tvDate.text = history.date.toString()
         holder.tvHour.text = history.time.toString()
-
     }
 
     override fun getItemCount() = listHistory.size
@@ -36,7 +34,6 @@ class HistoryAdapter:RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val tvHasilPermainan: TextView = itemView.findViewById(R.id.tvHasilPermainan)
-        val tvHasilPermainan2: TextView = itemView.findViewById(R.id.tvHasilPermainan2)
         val tvDate: TextView = itemView.findViewById(R.id.tvDate)
         val tvHour: TextView = itemView.findViewById(R.id.tvHour)
     }

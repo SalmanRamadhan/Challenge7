@@ -22,9 +22,7 @@ class HomeFragment : Fragment() {
     {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         binding?.apply {
-
             ivOpenPopMenu.setOnClickListener {
                 val popup = PopupMenu(activity,binding?.ivOpenPopMenu)
                 popup.inflate(R.menu.menu_pop_up)

@@ -41,6 +41,5 @@ abstract class HistoryDatabase : RoomDatabase(){
         private fun buildDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext, HistoryDatabase::class.java,"history-database"
         ).build()
-
     }
 }

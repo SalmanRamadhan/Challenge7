@@ -25,13 +25,12 @@ class AgainstComActivity : AppCompatActivity() {
 
 //    private fun addHistory(){
 //        val hasil = binding.tvResult.text
-//        val hasil2 = binding.tvResult2.text
 //        val date = ""
 //        val hour = ""
-//
+//        val userName = ""
 //
 //        GlobalScope.launch {
-//            val histories = History(hasilPermainan = hasil, hasilPermainan2 = hasil2, date = date, time = hour)
+//            val histories = History(hasilPermainan = hasil, date = date, time = hour, userName = userName)
 //            HistoryDatabase(this@AgainstComActivity).getHistoryDao().insertHistory(histories)
 //            finish()
 //        }

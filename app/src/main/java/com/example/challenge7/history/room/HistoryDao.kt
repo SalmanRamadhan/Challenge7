@@ -12,11 +12,7 @@ interface HistoryDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertHistory(history: History) : Long
 
-//    @Update
-//    suspend fun updateHistory(matchHistory: History) : Int
-
     @Delete
     suspend fun deleteHistory(history: History) : Int
-
 
 }
