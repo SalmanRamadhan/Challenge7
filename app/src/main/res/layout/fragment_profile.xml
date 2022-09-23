@@ -8,7 +8,7 @@
     tools:context=".menu.ProfileFragment">
 
     <View
-        android:id="@+id/viewTest"
+        android:id="@+id/viewTopBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/secondarycolor"
@@ -37,7 +37,7 @@
         android:src="@drawable/ic_image_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewTest" />
+        app:layout_constraintTop_toBottomOf="@id/viewTopBar" />
 
     <EditText
         android:id="@+id/etUserName"

@@ -8,7 +8,7 @@
     tools:context=".menu.HistoryFragment">
 
     <View
-        android:id="@+id/viewTest"
+        android:id="@+id/viewTopBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/secondarycolor"
@@ -45,7 +45,7 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewTest">
+        app:layout_constraintTop_toBottomOf="@id/viewTopBar">
 
         <CheckBox
             android:id="@+id/cbDelete"
@@ -116,7 +116,8 @@
         tools:itemCount="9"
         tools:listitem="@layout/item_history"
         tools:orientation="vertical"
-        tools:scrollbars="vertical" />
+        tools:scrollbars="vertical"
+        android:id="@+id/rvHistory"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

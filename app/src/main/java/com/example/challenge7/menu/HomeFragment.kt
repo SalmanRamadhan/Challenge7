@@ -8,6 +8,8 @@ import android.widget.PopupMenu
 import android.widget.RelativeLayout
 import com.example.challenge7.R
 import com.example.challenge7.databinding.FragmentHomeBinding
+import com.example.challenge7.gameplay.AgainstComActivity
+import com.example.challenge7.gameplay.AgainstPlayerActivity
 import com.example.challenge7.setting.SettingActivity
 
 
@@ -18,27 +20,44 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View?
     {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        binding?.apply { registerForContextMenu(this.ivOpenPopMenu) }
 
-        binding?.ivOpenPopMenu?.setOnClickListener {
-            val popup = PopupMenu(activity,binding?.ivOpenPopMenu)
-            popup.inflate(R.menu.menu_pop_up)
-            popup.setOnMenuItemClickListener {
-                when (it.itemId){
-                    R.id.menu_setting-> {
-                        toSetting()
-                        true
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        binding?.apply {
+
+            ivOpenPopMenu.setOnClickListener {
+                val popup = PopupMenu(activity,binding?.ivOpenPopMenu)
+                popup.inflate(R.menu.menu_pop_up)
+                popup.setOnMenuItemClickListener {
+                    when (it.itemId){
+                        R.id.menu_setting-> {
+                            toSetting()
+                            true
+                        }
+                        R.id.menu_Logout -> {
+                            logout()
+                            true
+                        }
+                        else -> false
                     }
-                    R.id.menu_Logout -> {
-                        logout()
-                        true
-                    }
-                    else -> false
                 }
+                popup.show()
             }
-            popup.show()
         }
+
+        binding?.apply {
+            ivPlayerVsCpu.setOnClickListener {
+                val vsCpu = Intent(requireContext(), AgainstComActivity::class.java)
+//                vsCpu.putExtra("USER_NAME", )
+                startActivity(vsCpu)
+            }
+            ivPlayerVsPlayer.setOnClickListener {
+                val vsPlayer = Intent(requireContext(), AgainstPlayerActivity::class.java)
+//                vsPlayer.putExtra("USER_NAME",)
+                startActivity(vsPlayer)
+            }
+        }
+
         return binding?.root
     }
     private fun toSetting(){
