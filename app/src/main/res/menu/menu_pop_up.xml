@@ -2,11 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_setting"
-        android:enabled="true"
-        android:title="@string/setting_menu_pop_up"/>
-
+        android:title="@string/setting_menu_pop_up" />
     <item
-        android:id="@+id/menu_Logout"
-        android:enabled="true"
-        android:title="@string/logout_menu_pop_up"/>
+        android:id="@+id/menu_logout"
+        android:title="@string/logout_menu_pop_up" />
 </menu>
