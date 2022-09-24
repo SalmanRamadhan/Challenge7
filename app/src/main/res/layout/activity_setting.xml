@@ -48,6 +48,7 @@
 
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sWSound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -115,18 +116,19 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/etGameRound"
             android:layout_width="206dp"
             android:layout_height="41dp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="20dp"
             android:background="@drawable/ic_colum_input"
             android:hint="@string/input_number_max_5_round"
-            android:textSize="12sp"
             android:padding="10dp"
-            android:textColorHint="@color/option2color" />
+            android:textColorHint="@color/option2color"
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

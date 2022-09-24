@@ -55,8 +55,6 @@ class LoginFragment : Fragment() {
 
         validation(email, pass)
 
-
-
         NetworkHelper.instance.login(email,pass).enqueue(object : Callback<GetUserResponse>{
             override fun onResponse(
                 call: Call<GetUserResponse>,

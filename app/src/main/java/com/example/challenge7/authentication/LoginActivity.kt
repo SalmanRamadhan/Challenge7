@@ -22,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun callFragment(fragment: Fragment){
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.fcvAuth,fragment)
         fragmentTransaction.commit()
