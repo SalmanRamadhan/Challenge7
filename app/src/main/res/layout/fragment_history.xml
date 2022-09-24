@@ -77,6 +77,7 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/titillium_web_regular"
             android:text="@string/button_delete"
+            android:visibility="gone"
             android:textColor="@color/secondarycolor"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -109,10 +110,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vSeparator"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="9"
         tools:listitem="@layout/item_history"
         tools:orientation="vertical"

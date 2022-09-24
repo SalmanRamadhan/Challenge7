@@ -1,18 +1,18 @@
 package com.example.challenge7.gameplay
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 
 import com.example.challenge7.R
-import com.example.challenge7.authentication.LoginActivity
 import com.example.challenge7.databinding.ActivityAgainstComBinding
 import com.example.challenge7.gameplay.dialog.ResultDialog
+import com.example.challenge7.gameplay.viewModel.AgainstCpuViewModel
+import com.example.challenge7.history.room.HistoryDatabase
 import com.example.challenge7.menu.MenuActivity
-import kotlin.math.max
+import java.sql.Timestamp
 
 class AgainstComActivity : AppCompatActivity() {
 
@@ -32,10 +32,15 @@ class AgainstComActivity : AppCompatActivity() {
     var playerProgress = maxRound
     var playerName = "Salman"
 
+    private val viewModel: AgainstCpuViewModel by viewModels()
+    private lateinit var database:HistoryDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAgainstComBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+        database = HistoryDatabase.instance(this)
+
 
         binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
 
@@ -120,6 +125,8 @@ class AgainstComActivity : AppCompatActivity() {
     private fun draw() {
 
         if (roundCounter == maxRound) {
+            val timeStamp = Timestamp(System.currentTimeMillis())
+            viewModel.saveGameHistory("Draw",timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         }
         Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show()
@@ -131,6 +138,8 @@ class AgainstComActivity : AppCompatActivity() {
         comProgress -= 1
         binding?.pbCOM?.progress = comProgress
         if (roundCounter == maxRound) {
+            val timeStamp = Timestamp(System.currentTimeMillis())
+            viewModel.saveGameHistory("Win", timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         }
         Toast.makeText(this, "Player Menang", Toast.LENGTH_SHORT).show()
@@ -141,6 +150,8 @@ class AgainstComActivity : AppCompatActivity() {
         playerProgress -= 1
         binding?.pbPlayer?.progress = playerProgress
         if (roundCounter == maxRound) {
+            val timeStamp = Timestamp(System.currentTimeMillis())
+            viewModel.saveGameHistory("Lose", timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         }
         Toast.makeText(this, "COM Menang", Toast.LENGTH_SHORT).show()

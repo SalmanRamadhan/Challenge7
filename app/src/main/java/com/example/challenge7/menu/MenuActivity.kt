@@ -1,16 +1,21 @@
 package com.example.challenge7.menu
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.challenge7.R
 import com.example.challenge7.databinding.ActivityMenuBinding
+import com.example.challenge7.history.room.HistoryDatabase
 
 
 class MenuActivity : AppCompatActivity() {
 
 
-    private var binding :ActivityMenuBinding? = null
+    private var binding: ActivityMenuBinding? = null
+
+    private val viewModel: MenuViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuBinding.inflate(layoutInflater)
@@ -21,7 +26,7 @@ class MenuActivity : AppCompatActivity() {
 
         binding?.bnvMenu?.setOnItemSelectedListener {
 
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.menu_1 -> {
                     replaceFragment(ProfileFragment())
                     true
@@ -41,10 +46,10 @@ class MenuActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment) {
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.fcvContainer,fragment)
+        fragmentTransaction.replace(R.id.fcvContainer, fragment)
         fragmentTransaction.commit()
 
     }

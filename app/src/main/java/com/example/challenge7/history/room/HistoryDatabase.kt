@@ -7,39 +7,26 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [History::class], version = 1)
-abstract class HistoryDatabase : RoomDatabase(){
+abstract class HistoryDatabase : RoomDatabase() {
 
     abstract fun getHistoryDao(): HistoryDao
 
-//    companion object {
-//        private var INSTANCE : HistoryDatabase? = null
-//
-//        fun getInstance(context: Context): HistoryDatabase?{
-//            if (INSTANCE == null){
-//                synchronized(HistoryDatabase::class){
-//                    INSTANCE = Room.databaseBuilder(context.applicationContext, HistoryDatabase::class.java, " History.db").build()
-//                }
-//            }
-//            return INSTANCE
-//        }
-//        fun destroyInstance(){
-//            INSTANCE = null
-//        }
-//    }
-
     companion object {
-        @Volatile
-        private var instance : HistoryDatabase? = null
-        private var LOCK = Any()
+        private var database: HistoryDatabase? = null
 
-        operator fun invoke(context:Context)= instance ?: synchronized(LOCK){
-            instance ?: buildDatabase(context).also {
-                instance = it
+        fun instance(context: Context): HistoryDatabase {
+            synchronized(HistoryDatabase::class) {
+                if (database == null) {
+                    database = Room.databaseBuilder(
+                        context.applicationContext,
+                        HistoryDatabase::class.java,
+                        "janken.db"
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
+                }
             }
+            return database!!
         }
-
-        private fun buildDatabase(context: Context) = Room.databaseBuilder(
-            context.applicationContext, HistoryDatabase::class.java,"history-database"
-        ).build()
     }
 }

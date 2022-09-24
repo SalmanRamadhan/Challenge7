@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.challenge7"
-        minSdk 21
-        targetSdk 32
+        minSdk 26
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "SERVER_URL", "\"https://binar-gdd-cc8.herokuapp.com/api/v1/\""
@@ -43,7 +43,8 @@ android {
         //Room and Coroutines
         def room_version = "2.4.3"
         implementation "androidx.room:room-runtime:$room_version"
-        annotationProcessor "androidx.room:room-compiler:$room_version"
+        implementation "androidx.room:room-ktx:$room_version"
+        kapt "androidx.room:room-compiler:$room_version"
         implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
 
@@ -56,7 +57,7 @@ android {
         androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
         implementation 'de.hdodenhof:circleimageview:3.1.0'
         implementation 'com.github.bumptech.glide:glide:4.13.2'
-        annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+        kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
         implementation 'me.relex:circleindicator:2.1.6'
         implementation("com.tbuonomo:dotsindicator:4.3")
@@ -71,13 +72,15 @@ android {
 
         def lifecycle_version = "2.6.0-alpha02"
 
-        // ViewModel
+        //architecture
         implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
-        // LiveData
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+        implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+        implementation 'androidx.activity:activity-ktx:1.6.0'
+        implementation 'androidx.fragment:fragment-ktx:1.5.3'
         implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
         implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
         implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
-//    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
         implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
 
 

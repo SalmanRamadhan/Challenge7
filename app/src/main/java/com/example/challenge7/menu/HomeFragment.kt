@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
                             toSetting()
                             true
                         }
-                        R.id.menu_Logout -> {
+                        R.id.menu_logout -> {
                             logout()
                             true
                         }
