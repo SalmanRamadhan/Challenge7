@@ -8,9 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import com.example.challenge7.databinding.ActivitySplashScreenBinding
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.landingpage.LandingPage
@@ -19,10 +16,11 @@ import com.example.challenge7.menu.MenuActivity
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
 
-    var binding : ActivitySplashScreenBinding? = null
+    var binding: ActivitySplashScreenBinding? = null
     var isAudio = false
     var soundId = 0
-    val soundPool : SoundPool by lazy {
+
+    private val soundPool: SoundPool by lazy {
         val audioAttributes = AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
             .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -35,20 +33,23 @@ class SplashScreen : AppCompatActivity() {
 
     private val sharedPreferences by lazy { SharedPreferences(this) }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         window.statusBarColor = resources.getColor(R.color.maincolor)
 
-        soundId = soundPool.load(this,R.raw.splashscreen,1)
+        isAudio = sharedPreferences.music ?: false
 
-        if(isAudio){
-            soundPool.play(soundId,1f,1f,1,0,1f)
+        soundId = soundPool.load(this, R.raw.splashscreen, 1)
+
+        if (isAudio) {
+            soundPool.play(soundId, 1f, 1f, 1, 1, 1f)
         }
         Handler(Looper.getMainLooper()).postDelayed({
-            if(sharedPreferences.getStatusLogin()){
-                startActivity(Intent(this,MenuActivity::class.java))
+            if (sharedPreferences.getStatusLogin()) {
+                startActivity(Intent(this, MenuActivity::class.java))
             } else {
                 startActivity(Intent(this, LandingPage::class.java))
             }
@@ -56,6 +57,7 @@ class SplashScreen : AppCompatActivity() {
         }, 3000)
 
     }
+
     override fun onDestroy() {
         super.onDestroy()
         soundPool.release()

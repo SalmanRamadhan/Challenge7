@@ -11,6 +11,7 @@ import com.example.challenge7.R
 import com.example.challenge7.databinding.FragmentHomeBinding
 import com.example.challenge7.gameplay.AgainstComActivity
 import com.example.challenge7.gameplay.AgainstPlayerActivity
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.setting.SettingActivity
 
 
@@ -43,6 +44,11 @@ class HomeFragment : Fragment() {
                 popup.show()
             }
         }
+        val sharedPreferences = SharedPreferences(requireActivity())
+        val name = sharedPreferences.getUser()?.username?:"Username"
+        binding?.tvUserName?.text = "Hi $name"
+        binding?.tvUserNameVsCpu?.text = "$name VS CPU"
+        binding?.tvUserNameVsPlayer?.text = "$name VS Player"
 
         binding?.apply {
             ivPlayerVsCpu.setOnClickListener {

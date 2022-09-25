@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.history.room.History
 import com.example.challenge7.history.room.HistoryDao
 import kotlinx.coroutines.launch
@@ -15,9 +16,9 @@ class HistoryViewModel : ViewModel() {
 
 //    var userName = blablbalba dari sharedpreference
 
-    fun getHistories(historyDao: HistoryDao) {
+    fun getHistories(historyDao: HistoryDao,userName: String) {
         viewModelScope.launch {
-            _histories.postValue(historyDao.getHistories("heri"))
+            _histories.postValue(historyDao.getHistories(userName))
 //            println("pesan -> ${_histories.value?.size}")
         }
     }

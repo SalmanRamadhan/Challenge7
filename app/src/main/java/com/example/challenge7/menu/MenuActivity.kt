@@ -20,15 +20,14 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding?.root)
         actionBar?.hide()
 
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fcvContainer, ProfileFragment())
+        fragmentTransaction.commit()
 
 
         binding?.bnvMenu?.setOnItemSelectedListener {
 
             when (it.itemId) {
-                R.id.menu_1 -> {
-                    replaceFragment(ProfileFragment())
-                    true
-                }
                 R.id.menu_2 -> {
                     replaceFragment(HomeFragment())
                     true
@@ -37,7 +36,10 @@ class MenuActivity : AppCompatActivity() {
                     replaceFragment(HistoryFragment())
                     true
                 }
-                else -> false
+                else -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
 
             }
 

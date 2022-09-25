@@ -9,11 +9,13 @@ import androidx.fragment.app.DialogFragment
 import com.example.challenge7.R
 import com.example.challenge7.databinding.LayoutDialogResultBinding
 import com.example.challenge7.gameplay.AgainstComActivity
+import com.example.challenge7.gameplay.AgainstPlayerActivity
 
-class ResultDialog(name: String) : DialogFragment() {
+class ResultDialog(name: String, isCOM: Boolean) : DialogFragment() {
 
     var binding: LayoutDialogResultBinding? = null
     var nameResult = name
+    var _isCOM = isCOM
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +43,11 @@ class ResultDialog(name: String) : DialogFragment() {
 
         binding?.btnPlayAgain?.setOnClickListener {
 
-            (activity as AgainstComActivity).reset()
+            if(_isCOM){
+                (activity as AgainstComActivity).reset()
+            } else {
+                (activity as AgainstPlayerActivity).reset()
+            }
             dialog?.dismiss()
 
         }

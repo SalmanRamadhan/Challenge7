@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.challenge7.R
-import com.example.challenge7.databinding.ActivityAgainstComBinding
 import com.example.challenge7.databinding.ActivityAgainstPlayerBinding
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.GUNTING
@@ -37,13 +36,13 @@ class AgainstPlayerActivity : AppCompatActivity() {
     }
 
     var roundCounter = 0
-    var maxRound = 3
+    var maxRound = 0
     var isPlay = false
     var isPlayer2Turn = false
     var player1Choice = 0
-    var comProgress = maxRound
-    var playerProgress = maxRound
-    var playerName = "Salman"
+    var comProgress = 0
+    var playerProgress = 0
+    var playerName = ""
     var soundWinId = 0
     var soundLoseId = 0
     var soundDrawId = 0
@@ -59,6 +58,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         setContentView(binding?.root)
         database = HistoryDatabase.instance(this)
 
+        isAudio = sharedPreferences.music?:false
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
         maxRound = sharedPreferences.round ?: 1
         playerName = sharedPreferences.getUser()?.username ?: "Player"
@@ -77,6 +77,8 @@ class AgainstPlayerActivity : AppCompatActivity() {
         binding?.pbPlayer?.progress = maxRound
         binding?.pbCOM?.max = maxRound
         binding?.pbPlayer?.max = maxRound
+        comProgress = maxRound
+        playerProgress = maxRound
 
         binding?.tvChoice?.setOnClickListener {
             if (binding?.tvChoice?.text == getString(R.string.choice_rematch)) {
@@ -206,8 +208,6 @@ class AgainstPlayerActivity : AppCompatActivity() {
     private fun draw() {
 
         if (roundCounter == maxRound) {
-            val timeStamp = Timestamp(System.currentTimeMillis())
-            viewModel.saveGameHistory("Win", "Player VS Player" , timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
@@ -225,8 +225,6 @@ class AgainstPlayerActivity : AppCompatActivity() {
         comProgress -= 1
         binding?.pbCOM?.progress = comProgress
         if (roundCounter == maxRound) {
-            val timeStamp = Timestamp(System.currentTimeMillis())
-            viewModel.saveGameHistory("Win", "Player VS Player" , timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
@@ -242,9 +240,6 @@ class AgainstPlayerActivity : AppCompatActivity() {
         playerProgress -= 1
         binding?.pbPlayer?.progress = playerProgress
         if (roundCounter == maxRound) {
-            val timeStamp = Timestamp(System.currentTimeMillis())
-            viewModel.saveGameHistory("Win", "Player VS Player" , timeStamp.time, "heri", database.getHistoryDao())
-
             showDialogResult()
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
@@ -262,13 +257,28 @@ class AgainstPlayerActivity : AppCompatActivity() {
         binding?.ivLastChoiceCOM?.visibility = View.VISIBLE
         binding?.ivLastChoicePlayer?.visibility = View.VISIBLE
         binding?.tvReadyCOM?.visibility = View.VISIBLE
+
+        val timeStamp = Timestamp(System.currentTimeMillis())
+        viewModel.saveGameHistory(
+            when{
+                comProgress == playerProgress -> getString(R.string.result_seri)
+                comProgress > playerProgress -> "Kalah"
+                comProgress < playerProgress -> "Menang"
+                else -> ""
+            },
+            modePermainan = "Player VS Player",
+            timeStamp.time,
+            playerName,
+            database.getHistoryDao()
+        )
+
         val dialog = ResultDialog(
             when {
                 comProgress == playerProgress -> getString(R.string.result_seri)
                 comProgress > playerProgress -> "Player 2"
                 comProgress < playerProgress -> playerName
                 else -> ""
-            }
+            }, false
         )
         dialog.show(supportFragmentManager, "ResultDialog")
     }

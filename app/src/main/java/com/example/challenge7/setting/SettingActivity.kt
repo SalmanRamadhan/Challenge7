@@ -46,11 +46,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setMusic() {
         val music = binding?.sWSound?.isChecked
-        if (music == true) {
-            SharedPreferences.music = true
-        } else {
-            SharedPreferences.music = false
-        }
+        SharedPreferences.music = music == true
     }
 
     private fun setRound() {
@@ -72,6 +68,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setOnCLickListener() {
         binding?.btnSave?.setOnClickListener {
+            setMusic()
             if (isRoundFilled()) {
                 //save the round
                 SharedPreferences?.let {
@@ -83,6 +80,7 @@ class SettingActivity : AppCompatActivity() {
             } else {
                 binding?.etGameRound?.error = "Please fill the round"
             }
+
         }
     }
 }

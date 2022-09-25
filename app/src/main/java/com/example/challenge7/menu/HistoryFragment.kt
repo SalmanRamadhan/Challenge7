@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challenge7.R
 import com.example.challenge7.databinding.FragmentHistoryBinding
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.history.adapter.HistoryAdapter
 import com.example.challenge7.history.room.History
 import com.example.challenge7.history.room.HistoryDatabase
@@ -23,12 +24,15 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HistoryViewModel by activityViewModels()
     private lateinit var database: HistoryDatabase
+    var name = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         database = HistoryDatabase.instance(requireContext())
-        viewModel.getHistories(database.getHistoryDao())
+        val sharedPreferences = SharedPreferences(requireActivity())
+        name = sharedPreferences.getUser()?.username?:"Username"
+        viewModel.getHistories(database.getHistoryDao(),name)
     }
 
     override fun onCreateView(
@@ -89,7 +93,7 @@ class HistoryFragment : Fragment() {
                 binding.tvDelete.setOnClickListener {
                     val checkedItems = historyAdapter.getAllChecked()
                     viewModel.deleteHistories(checkedItems, database.getHistoryDao()) {
-                        viewModel.getHistories(database.getHistoryDao())
+                        viewModel.getHistories(database.getHistoryDao(),name)
                     }
                 }
             }
