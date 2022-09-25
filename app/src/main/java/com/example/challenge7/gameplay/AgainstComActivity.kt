@@ -5,11 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 
 import com.example.challenge7.R
 import com.example.challenge7.authentication.LoginActivity
 import com.example.challenge7.databinding.ActivityAgainstComBinding
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
 import com.example.challenge7.gameplay.dialog.ResultDialog
 import com.example.challenge7.menu.MenuActivity
 import kotlin.math.max
@@ -80,12 +82,13 @@ class AgainstComActivity : AppCompatActivity() {
 
     fun reset() {
 
-
         binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
         binding?.pbCOM?.progress = maxRound
         binding?.pbPlayer?.progress = maxRound
         binding?.pbCOM?.max = maxRound
         binding?.pbPlayer?.max = maxRound
+        binding?.ivLastChoiceCOM?.visibility = View.GONE
+        binding?.ivLastChoicePlayer?.visibility = View.GONE
         comProgress = maxRound
         playerProgress = maxRound
         roundCounter = 0
@@ -113,6 +116,29 @@ class AgainstComActivity : AppCompatActivity() {
                 won()
             }
             else -> lost()
+        }
+
+        if(roundCounter == maxRound){
+            when{
+                p1 == BATU  -> {
+                    binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_batu)
+                }
+                p1 == KERTAS -> {
+                    binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_kertas)
+                }
+                p1 == GUNTING -> {
+                    binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_gunting)
+                }
+                p2 == BATU -> {
+                    binding?.ivLastChoiceCOM?.setImageResource(R.drawable.ic_batu)
+                }
+                p2 == KERTAS -> {
+                    binding?.ivLastChoiceCOM?.setImageResource(R.drawable.ic_kertas)
+                }
+                p2 == GUNTING -> {
+                    binding?.ivLastChoiceCOM?.setImageResource(R.drawable.ic_gunting)
+                }
+            }
         }
 
     }
@@ -149,6 +175,8 @@ class AgainstComActivity : AppCompatActivity() {
 
     private fun showDialogResult() {
         binding?.tvChoice?.text = getString(R.string.choice_rematch)
+        binding?.ivLastChoiceCOM?.visibility = View.VISIBLE
+        binding?.ivLastChoicePlayer?.visibility = View.VISIBLE
 
         isPlay = true
         val dialog = ResultDialog(

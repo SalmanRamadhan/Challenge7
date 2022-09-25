@@ -53,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvCOM" />
 
     <LinearLayout
+        android:id="@+id/llCOM"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -83,14 +84,29 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/ivLastChoiceCOM"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:rotation="-25"
+        android:visibility="gone"
+        android:src="@drawable/ic_gunting"
+        app:layout_constraintEnd_toEndOf="@id/llCOM"
+        app:layout_constraintStart_toStartOf="@id/llCOM"
+        app:layout_constraintTop_toBottomOf="@id/llCOM" />
+
+
+    <ImageView
         android:id="@+id/ivVs"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_vs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/tvChoice"
@@ -103,6 +119,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivVs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLastChoicePlayer"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:rotation="25"
+        android:visibility="gone"
+        android:src="@drawable/ic_batu"
+        app:layout_constraintBottom_toTopOf="@id/tvPlayer"
+        app:layout_constraintEnd_toEndOf="@id/tvPlayer"
+        app:layout_constraintStart_toStartOf="@id/tvPlayer" />
 
     <TextView
         android:id="@+id/tvPlayer"

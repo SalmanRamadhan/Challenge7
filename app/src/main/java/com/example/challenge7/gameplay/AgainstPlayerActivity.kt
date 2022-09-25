@@ -11,13 +11,7 @@ import com.example.challenge7.menu.MenuActivity
 
 class AgainstPlayerActivity : AppCompatActivity() {
 
-    companion object {
 
-        const val BATU = 1
-        const val KERTAS = 2
-        const val GUNTING = 3
-
-    }
 
     var binding: ActivityAgainstComBinding? = null
     var roundCounter = 0
