@@ -39,7 +39,7 @@ class AgainstComActivity : AppCompatActivity() {
         binding = ActivityAgainstComBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
+        binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
 
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstComActivity, MenuActivity::class.java)
@@ -52,7 +52,7 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.pbPlayer?.max = maxRound
 
         binding?.tvChoice?.setOnClickListener {
-            if(binding?.tvChoice?.text == getString(R.string.choice_rematch)){
+            if (binding?.tvChoice?.text == getString(R.string.choice_rematch)) {
                 reset()
             }
         }
@@ -82,7 +82,7 @@ class AgainstComActivity : AppCompatActivity() {
 
     fun reset() {
 
-        binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
+        binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
         binding?.pbCOM?.progress = maxRound
         binding?.pbPlayer?.progress = maxRound
         binding?.pbCOM?.max = maxRound
@@ -118,9 +118,9 @@ class AgainstComActivity : AppCompatActivity() {
             else -> lost()
         }
 
-        if(roundCounter == maxRound){
-            when{
-                p1 == BATU  -> {
+        if (roundCounter == maxRound) {
+            when {
+                p1 == BATU -> {
                     binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_batu)
                 }
                 p1 == KERTAS -> {
@@ -159,7 +159,7 @@ class AgainstComActivity : AppCompatActivity() {
         if (roundCounter == maxRound) {
             showDialogResult()
         }
-        Toast.makeText(this, "Player Menang", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$playerName Menang", Toast.LENGTH_SHORT).show()
 
     }
 

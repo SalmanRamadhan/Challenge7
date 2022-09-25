@@ -34,9 +34,10 @@
         android:textAlignment="center"
         android:textColor="@color/secondarycolor"
         android:textSize="24sp"
+        android:text="@string/player_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="COM" />
+        tools:text="Player 2" />
 
     <ProgressBar
         android:id="@+id/pbCOM"
@@ -63,19 +64,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pbCOM">
 
+        <TextView
+            android:id="@+id/tvReadyCOM"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/titillium_web_bold"
+            android:text="READY!!!"
+            android:textAlignment="center"
+            android:textColor="@color/option2color"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
         <ImageView
+            android:id="@+id/ivBatuCOM"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_batu" />
 
         <ImageView
+            android:id="@+id/ivKertasCOM"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_kertas" />
 
         <ImageView
+            android:id="@+id/ivGuntingCOM"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -89,8 +104,8 @@
         android:layout_height="130dp"
         android:layout_marginTop="20dp"
         android:rotation="-25"
-        android:visibility="gone"
         android:src="@drawable/ic_gunting"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/llCOM"
         app:layout_constraintStart_toStartOf="@id/llCOM"
         app:layout_constraintTop_toBottomOf="@id/llCOM" />
@@ -127,8 +142,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:rotation="25"
-        android:visibility="gone"
         android:src="@drawable/ic_batu"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/tvPlayer"
         app:layout_constraintEnd_toEndOf="@id/tvPlayer"
         app:layout_constraintStart_toStartOf="@id/tvPlayer" />
@@ -170,6 +185,17 @@
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvReadyPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/titillium_web_bold"
+            android:text="READY!!!"
+            android:textAlignment="center"
+            android:textColor="@color/option2color"
+            android:textSize="24sp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/ivBatu"
