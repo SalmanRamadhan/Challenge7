@@ -8,7 +8,7 @@
     tools:context=".menu.HistoryFragment">
 
     <View
-        android:id="@+id/viewTest"
+        android:id="@+id/viewTopBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/secondarycolor"
@@ -29,6 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/ivDelete"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
@@ -45,10 +46,10 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewTest">
+        app:layout_constraintTop_toBottomOf="@id/viewTopBar">
 
         <CheckBox
-            android:id="@+id/cbDelete"
+            android:id="@+id/cbDeleteAll"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:buttonTint="@color/secondarycolor"
@@ -67,7 +68,7 @@
             android:textColor="@color/secondarycolor"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cbDelete"
+            app:layout_constraintStart_toEndOf="@id/cbDeleteAll"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -107,16 +108,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clDeleteAll" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_no_data"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/ivEmptyHistory"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vSeparator"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="9"
         tools:listitem="@layout/item_history"
         tools:orientation="vertical"
-        tools:scrollbars="vertical" />
+        tools:scrollbars="vertical"
+        android:id="@+id/rvHistory"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

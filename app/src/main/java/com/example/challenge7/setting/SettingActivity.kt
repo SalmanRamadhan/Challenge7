@@ -1,13 +1,13 @@
 package com.example.challenge7.setting
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.challenge7.R
 import com.example.challenge7.authentication.SignUpFragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.challenge7.databinding.ActivitySettingBinding
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity

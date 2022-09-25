@@ -8,7 +8,7 @@
     android:background="@color/maincolor">
 
     <View
-        android:id="@+id/viewTest"
+        android:id="@+id/viewTopBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/secondarycolor"
@@ -41,7 +41,7 @@
         android:id="@+id/viewSoundbar"
         android:layout_width="311dp"
         android:layout_height="65dp"
-        android:layout_below="@id/viewTest"
+        android:layout_below="@id/viewTopBar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:background="@color/setting_bar">
@@ -151,18 +151,18 @@
         android:id="@+id/btnHome"
         android:layout_width="131dp"
         android:layout_height="43dp"
+        android:layout_alignTop="@id/btnSave"
         android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_rounded"
         android:backgroundTint="@color/option2color"
-        android:text="@string/home"
-        android:textColor="@color/maincolor"
-        android:textAllCaps="false"
-        android:textSize="20sp"
         android:fontFamily="@font/titillium_web_regular"
+        android:text="@string/home"
+        android:textAllCaps="false"
+        android:textColor="@color/maincolor"
         android:textFontWeight="600"
-        tools:ignore="UnusedAttribute"
-        android:layout_alignTop="@id/btnSave"
-        android:layout_marginTop="60dp"/>
+        android:textSize="20sp"
+        tools:ignore="UnusedAttribute" />
 
 
 

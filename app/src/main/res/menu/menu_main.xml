@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_1"
         android:enabled="true"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_user"
         android:title="@string/menu_title_1"
         />
 
@@ -12,8 +12,7 @@
         android:id="@+id/menu_2"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="@string/menu_title_2"
-        />
+        android:title="@string/menu_title_2" />
 
     <item
         android:id="@+id/menu_3"

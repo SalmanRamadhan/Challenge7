@@ -8,7 +8,7 @@
     tools:context=".menu.ProfileFragment">
 
     <View
-        android:id="@+id/viewTest"
+        android:id="@+id/viewTopBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/secondarycolor"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/civProfile"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -37,7 +37,7 @@
         android:src="@drawable/ic_image_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewTest" />
+        app:layout_constraintTop_toBottomOf="@id/viewTopBar" />
 
     <EditText
         android:id="@+id/etUserName"
@@ -95,6 +95,7 @@
         app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
     <TextView
+        android:id="@+id/tvLogout"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/buttton_logout"
