@@ -90,7 +90,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
             if(isPlayer2Turn){
                 play(
                     player1Choice,
-                    KERTAS
+                    BATU
                 )
             }
         }
@@ -99,7 +99,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
             if(isPlayer2Turn){
                 play(
                     player1Choice,
-                    KERTAS
+                    GUNTING
                 )
             }
         }
