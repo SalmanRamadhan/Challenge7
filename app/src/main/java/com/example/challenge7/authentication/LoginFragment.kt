@@ -20,9 +20,6 @@ import retrofit2.Response
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        var SUCCESS = 0
-    }
 
     var binding: FragmentLoginBinding? = null
     lateinit var sph: SharedPreferences
@@ -63,7 +60,7 @@ class LoginFragment : Fragment() {
                 val respon = response.body()
 
                 if (response.isSuccessful) {
-                    if (response.code() == 200) {
+                    if (respon?.success == true) {
                         sph.setStatusLogin(true)
                         sph.setUser(respon?.data!!)
 
@@ -71,17 +68,15 @@ class LoginFragment : Fragment() {
                         Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
                         activity?.finish()
                     } else{
-                        Toast.makeText(activity, "Gagal Login", Toast.LENGTH_LONG).show()
+                        response.errorBody()?.let {
+                            Toast.makeText(activity, it.string(), Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
 
             override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
-                if (t.message == "Wrong password!") {
-                    Toast.makeText(activity, "Wrong password!", Toast.LENGTH_LONG).show()
-                }else{
                     Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
-                }
             }
         })
     }
