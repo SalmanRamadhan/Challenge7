@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.challenge7.R
 import com.example.challenge7.authentication.SignUpFragment
 import com.example.challenge7.databinding.ActivitySettingBinding
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 
 class SettingActivity : AppCompatActivity() {
@@ -15,6 +16,8 @@ class SettingActivity : AppCompatActivity() {
     companion object {
         var round: Int = 1
     }
+
+    private val SharedPreferences by lazy { SharedPreferences(this) }
 
     var binding: ActivitySettingBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +37,9 @@ class SettingActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        binding?.btnSave?.setOnClickListener {
-            setRound()
-            setMusic()
-        }
+        setMusic()
+        setOnCLickListener()
+        setRound()
 
     }
 
@@ -52,11 +54,33 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setRound() {
         //fill the game round
-        round = binding?.etGameRound?.text.toString().toInt()
+        SharedPreferences?.let {
+            binding?.etGameRound?.setText(it.round.toString())
+        }
+    }
 
-        if (round > 5) {
-            binding?.etGameRound?.error = "Maksimal 5 round"
-            return
+    private fun isRoundFilled(): Boolean {
+        val round = binding?.etGameRound?.text.toString()
+        var isRoundFilled = true
+
+        if (round.isEmpty()) {
+            isRoundFilled = false
+        }
+        return isRoundFilled
+    }
+
+    private fun setOnCLickListener() {
+        binding?.btnSave?.setOnClickListener {
+            if (isRoundFilled()) {
+                //save the round
+                SharedPreferences?.let {
+                    it.round = binding?.etGameRound?.text.toString().toInt()
+                }
+                val i = Intent(this, MenuActivity::class.java)
+                startActivity(i)
+            } else {
+                binding?.etGameRound?.error = "Please fill the round"
+            }
         }
     }
 }
