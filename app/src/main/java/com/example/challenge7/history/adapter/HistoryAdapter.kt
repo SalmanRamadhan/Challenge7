@@ -33,6 +33,7 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
         holder.tvModePermainan.text = data.history.modePermainan
         holder.tvDate.text = sdfDate.format(date)
         holder.tvHour.text = sdfTime.format(date)
+        holder.cbCheck.visibility = View.INVISIBLE
 
         holder.cbCheck.isChecked = data.checked
         holder.cbCheck.setOnCheckedChangeListener { _, checked ->
@@ -73,6 +74,10 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
         }.map {
             it.history
         }
+    }
+
+    fun isHistoryEmpty(): Boolean{
+        return listHistory.size == 0
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
