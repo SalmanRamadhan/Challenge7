@@ -12,12 +12,14 @@ import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.GUNTING
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.KERTAS
 import com.example.challenge7.gameplay.dialog.ResultDialog
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 
 class AgainstPlayerActivity : AppCompatActivity() {
 
-
+    private val sharedPreferences by lazy { SharedPreferences(this) }
     var binding: ActivityAgainstPlayerBinding? = null
+
     var roundCounter = 0
     var maxRound = 3
     var isPlay = false
@@ -33,6 +35,8 @@ class AgainstPlayerActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
+        maxRound = sharedPreferences.round ?: 1
+        playerName = sharedPreferences.getUser()?.username ?: "Player"
 
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstPlayerActivity, MenuActivity::class.java)
@@ -78,7 +82,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         }
 
         binding?.ivKertasCOM?.setOnClickListener {
-            if(isPlayer2Turn){
+            if (isPlayer2Turn) {
                 play(
                     player1Choice,
                     KERTAS
@@ -87,7 +91,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         }
 
         binding?.ivBatuCOM?.setOnClickListener {
-            if(isPlayer2Turn){
+            if (isPlayer2Turn) {
                 play(
                     player1Choice,
                     BATU
@@ -96,7 +100,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         }
 
         binding?.ivGuntingCOM?.setOnClickListener {
-            if(isPlayer2Turn){
+            if (isPlayer2Turn) {
                 play(
                     player1Choice,
                     GUNTING
@@ -190,7 +194,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
         }
-        Toast.makeText(this, "Player Menang", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$playerName Menang", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -215,7 +219,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         val dialog = ResultDialog(
             when {
                 comProgress == playerProgress -> getString(R.string.result_seri)
-                comProgress > playerProgress -> getString(R.string.result_com)
+                comProgress > playerProgress -> "Player 2"
                 comProgress < playerProgress -> playerName
                 else -> ""
             }

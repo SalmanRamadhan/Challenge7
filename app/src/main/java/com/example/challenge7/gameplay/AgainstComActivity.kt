@@ -12,8 +12,12 @@ import com.example.challenge7.R
 import com.example.challenge7.authentication.LoginActivity
 import com.example.challenge7.databinding.ActivityAgainstComBinding
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.GUNTING
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.KERTAS
 import com.example.challenge7.gameplay.dialog.ResultDialog
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
+import com.example.challenge7.setting.SettingActivity.Companion.round
 import kotlin.math.max
 
 class AgainstComActivity : AppCompatActivity() {
@@ -26,7 +30,9 @@ class AgainstComActivity : AppCompatActivity() {
 
     }
 
+    private val sharedPreferences by lazy { SharedPreferences(this) }
     var binding: ActivityAgainstComBinding? = null
+
     var roundCounter = 0
     var maxRound = 3
     var isPlay = false
@@ -39,6 +45,8 @@ class AgainstComActivity : AppCompatActivity() {
         binding = ActivityAgainstComBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        maxRound = sharedPreferences.round ?: 1
+        playerName = sharedPreferences.getUser()?.username ?: "Player"
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
 
         binding?.ivHome?.setOnClickListener {
