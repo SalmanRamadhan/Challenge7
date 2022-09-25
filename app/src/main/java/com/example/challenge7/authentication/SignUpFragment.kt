@@ -19,14 +19,15 @@ import retrofit2.Response
 class SignUpFragment : Fragment() {
 
     var binding: FragmentSignUpBinding? = null
-    lateinit var sph: SharedPreferences
+    private val sharedPreferences by lazy {
+        SharedPreferences(requireActivity())
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSignUpBinding.inflate(layoutInflater)
-        sph = SharedPreferences(requireActivity())
 
         binding?.btnSignUp?.setOnClickListener {
             register()
@@ -45,14 +46,10 @@ class SignUpFragment : Fragment() {
         val email = binding?.edtEmail?.text.toString()
         val username = binding?.edtUserName?.text.toString()
         val pass = binding?.edtPassword?.text.toString()
+        val rePass = binding?.edtRePassword?.text.toString()
 
         if (email.isEmpty()) {
             binding?.edtEmail?.error = "Isi dulu!"
-            return
-        }
-
-        if (pass.isEmpty()) {
-            binding?.edtPassword?.error = "Isi dulu!"
             return
         }
 
@@ -60,6 +57,21 @@ class SignUpFragment : Fragment() {
             binding?.edtUserName?.error = "Isi dulu!"
             return
         }
+
+        if (pass.isEmpty()) {
+            binding?.edtPassword?.error = "Isi dulu!"
+            return
+        }
+        if (rePass.isEmpty()) {
+            binding?.edtRePassword?.error = "Isi dulu!"
+            return
+        }
+        //cek ulang password
+        if (pass != rePass) {
+            binding?.edtRePassword?.error = "Password tidak sama!"
+            return
+        }
+
 
         NetworkHelper.instance.register(email,pass, username).enqueue(object : Callback<GetUserResponse> {
             override fun onResponse(
@@ -69,15 +81,17 @@ class SignUpFragment : Fragment() {
                 val respon = response.body()
 
                 if (response.isSuccessful) {
-                    if (respon?.success == false) {
-                        Toast.makeText(activity, "Gagal Register", Toast.LENGTH_LONG).show()
+                    if (respon?.success == true) {
+                        respon?.let {
+                            sharedPreferences.setStatusLogin(true)
+                            //mengarahkan ke fragment login
+                            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+                            fragmentTransaction?.add(((view as ViewGroup).parent as View).id,LoginFragment())
+                            fragmentTransaction?.commit()
+                            Toast.makeText(activity, "Berhasil Register", Toast.LENGTH_LONG).show()
+                        }
                     } else{
-                        sph.setStatusLogin(true)
-                        sph.setUser(respon?.data!!)
-
-                        startActivity(Intent(activity, MenuActivity::class.java))
-                        Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
-                        activity?.finish()
+                        Toast.makeText(activity, "Gagal Register", Toast.LENGTH_LONG).show()
                     }
                 }
             }

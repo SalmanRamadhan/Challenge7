@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.example.challenge7.R
+import com.example.challenge7.authentication.LoginActivity
 import com.example.challenge7.databinding.FragmentHomeBinding
 import com.example.challenge7.gameplay.AgainstComActivity
 import com.example.challenge7.gameplay.AgainstPlayerActivity
@@ -17,6 +18,10 @@ import com.example.challenge7.setting.SettingActivity
 
 class HomeFragment : Fragment() {
     private var binding : FragmentHomeBinding? = null
+
+    private val sharedPreferences by lazy {
+        SharedPreferences(requireActivity())
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,9 +76,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun logout(){
-        activity?.finish()
-    }
-
-
+            sharedPreferences.setStatusLogin(false)
+            val intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
 
 }

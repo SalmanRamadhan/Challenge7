@@ -1,7 +1,6 @@
 package com.example.challenge7.menu
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.challenge7.R

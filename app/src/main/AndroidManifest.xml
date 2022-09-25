@@ -27,9 +27,9 @@
             android:exported="false" />
         <activity
             android:name=".menu.MenuActivity"
-            android:exported="true">
+            android:exported="true"/>
 
-        </activity>
+
         <activity
             android:name=".authentication.LoginActivity"
             android:exported="false" />
@@ -44,8 +44,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"/>

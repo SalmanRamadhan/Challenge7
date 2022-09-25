@@ -44,7 +44,7 @@ class SharedPreferences(activity: FragmentActivity){
     }
 
     fun setUser(value : UserData){
-        //ubah dari data object ke dta string
+        //ubah dari data object ke data string
         val data = Gson().toJson(value, UserData::class.java)
         sharedPreference.edit().putString(user, data).apply()
     }
@@ -53,11 +53,6 @@ class SharedPreferences(activity: FragmentActivity){
         //ubah dari data string ke data object
         val data = sharedPreference.getString(user, null) ?: return null
         return Gson().fromJson<UserData>(data, UserData::class.java)
-    }
-
-    //delete data user
-    fun deleteUser(){
-        sharedPreference.edit().remove(user).apply()
     }
 
 }
