@@ -20,7 +20,7 @@ abstract class HistoryDatabase : RoomDatabase() {
                     database = Room.databaseBuilder(
                         context.applicationContext,
                         HistoryDatabase::class.java,
-                        "janken.db"
+                        "jankenpon.db"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

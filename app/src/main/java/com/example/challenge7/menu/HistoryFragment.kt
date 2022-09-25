@@ -16,7 +16,7 @@ class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: MenuViewModel by activityViewModels()
+    private val viewModel: HistoryViewModel by activityViewModels()
     private lateinit var database: HistoryDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {

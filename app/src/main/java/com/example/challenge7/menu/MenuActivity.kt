@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.challenge7.R
 import com.example.challenge7.databinding.ActivityMenuBinding
-import com.example.challenge7.history.room.HistoryDatabase
 
 
 class MenuActivity : AppCompatActivity() {
 
 
     private var binding: ActivityMenuBinding? = null
-
-    private val viewModel: MenuViewModel by viewModels()
+    private val viewModel: HistoryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,7 +8,7 @@ import com.example.challenge7.history.room.History
 import com.example.challenge7.history.room.HistoryDao
 import kotlinx.coroutines.launch
 
-class MenuViewModel : ViewModel() {
+class HistoryViewModel : ViewModel() {
 
     private val _histories = MutableLiveData<List<History>>(listOf())
     val histories: LiveData<List<History>> = _histories

@@ -126,7 +126,7 @@ class AgainstComActivity : AppCompatActivity() {
 
         if (roundCounter == maxRound) {
             val timeStamp = Timestamp(System.currentTimeMillis())
-            viewModel.saveGameHistory("Draw",timeStamp.time, "heri", database.getHistoryDao())
+            viewModel.saveGameHistory("Draw",timeStamp.time, "Salman", database.getHistoryDao())
             showDialogResult()
         }
         Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show()
@@ -139,7 +139,7 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.pbCOM?.progress = comProgress
         if (roundCounter == maxRound) {
             val timeStamp = Timestamp(System.currentTimeMillis())
-            viewModel.saveGameHistory("Win", timeStamp.time, "heri", database.getHistoryDao())
+            viewModel.saveGameHistory("Win", timeStamp.time, "Salman", database.getHistoryDao())
             showDialogResult()
         }
         Toast.makeText(this, "Player Menang", Toast.LENGTH_SHORT).show()
@@ -151,7 +151,7 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.pbPlayer?.progress = playerProgress
         if (roundCounter == maxRound) {
             val timeStamp = Timestamp(System.currentTimeMillis())
-            viewModel.saveGameHistory("Lose", timeStamp.time, "heri", database.getHistoryDao())
+            viewModel.saveGameHistory("Lose", timeStamp.time, "Salman", database.getHistoryDao())
             showDialogResult()
         }
         Toast.makeText(this, "COM Menang", Toast.LENGTH_SHORT).show()
