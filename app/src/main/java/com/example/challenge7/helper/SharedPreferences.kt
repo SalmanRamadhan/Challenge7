@@ -8,15 +8,25 @@ import com.google.gson.Gson
 
 class SharedPreferences(activity: FragmentActivity){
 
-    val login = "Login"
-    val myPref = "Main_Pref"
-    val sharedPreference: SharedPreferences
+    companion object {
+        private const val ROUND_GAME = "ROUND_GAME"
 
-    val user = "User"
+        val login = "Login"
+        val myPref = "Main_Pref"
+        val user = "User"
+    }
+
+    val sharedPreference: SharedPreferences
 
     init {
         sharedPreference = activity.getSharedPreferences(myPref, Context.MODE_PRIVATE)
     }
+
+    var round: Int?
+        get() = sharedPreference.getInt(ROUND_GAME, 1)
+        set(value) {
+            sharedPreference.edit().putInt(ROUND_GAME, value!!).apply()
+        }
 
     fun setStatusLogin(status: Boolean){
         sharedPreference.edit().putBoolean(login, status).apply()

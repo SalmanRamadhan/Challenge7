@@ -48,4 +48,5 @@
     <string name="result_com">COM</string>
     <string name="choice_rematch">Rematch?</string>
     <string name="choice_silahkan">%1$s Silahkan Pilih</string>
+    <string name="player_2">PLayer 2</string>
 </resources>

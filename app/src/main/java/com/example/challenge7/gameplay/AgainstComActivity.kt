@@ -1,13 +1,17 @@
 package com.example.challenge7.gameplay
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-
 import com.example.challenge7.R
+import com.example.challenge7.authentication.LoginActivity
 import com.example.challenge7.databinding.ActivityAgainstComBinding
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
 import com.example.challenge7.gameplay.dialog.ResultDialog
 import com.example.challenge7.gameplay.viewModel.AgainstCpuViewModel
 import com.example.challenge7.history.room.HistoryDatabase
@@ -35,6 +39,10 @@ class AgainstComActivity : AppCompatActivity() {
     private val viewModel: AgainstCpuViewModel by viewModels()
     private lateinit var database:HistoryDatabase
 
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAgainstComBinding.inflate(layoutInflater)
@@ -42,7 +50,7 @@ class AgainstComActivity : AppCompatActivity() {
         database = HistoryDatabase.instance(this)
 
 
-        binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
+        binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
 
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstComActivity, MenuActivity::class.java)
@@ -55,7 +63,7 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.pbPlayer?.max = maxRound
 
         binding?.tvChoice?.setOnClickListener {
-            if(binding?.tvChoice?.text == getString(R.string.choice_rematch)){
+            if (binding?.tvChoice?.text == getString(R.string.choice_rematch)) {
                 reset()
             }
         }
@@ -85,12 +93,13 @@ class AgainstComActivity : AppCompatActivity() {
 
     fun reset() {
 
-
-        binding?.tvChoice?.text = getString(R.string.choice_silahkan,playerName)
+        binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
         binding?.pbCOM?.progress = maxRound
         binding?.pbPlayer?.progress = maxRound
         binding?.pbCOM?.max = maxRound
         binding?.pbPlayer?.max = maxRound
+        binding?.ivLastChoiceCOM?.visibility = View.GONE
+        binding?.ivLastChoicePlayer?.visibility = View.GONE
         comProgress = maxRound
         playerProgress = maxRound
         roundCounter = 0
@@ -120,6 +129,29 @@ class AgainstComActivity : AppCompatActivity() {
             else -> lost()
         }
 
+        if (roundCounter == maxRound) {
+            when {
+                p1 == BATU -> {
+                    binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_batu)
+                }
+                p1 == KERTAS -> {
+                    binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_kertas)
+                }
+                p1 == GUNTING -> {
+                    binding?.ivLastChoicePlayer?.setImageResource(R.drawable.ic_gunting)
+                }
+                p2 == BATU -> {
+                    binding?.ivLastChoiceCOM?.setImageResource(R.drawable.ic_batu)
+                }
+                p2 == KERTAS -> {
+                    binding?.ivLastChoiceCOM?.setImageResource(R.drawable.ic_kertas)
+                }
+                p2 == GUNTING -> {
+                    binding?.ivLastChoiceCOM?.setImageResource(R.drawable.ic_gunting)
+                }
+            }
+        }
+
     }
 
     private fun draw() {
@@ -142,7 +174,7 @@ class AgainstComActivity : AppCompatActivity() {
             viewModel.saveGameHistory("Win", timeStamp.time, "Salman", database.getHistoryDao())
             showDialogResult()
         }
-        Toast.makeText(this, "Player Menang", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$playerName Menang", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -160,6 +192,8 @@ class AgainstComActivity : AppCompatActivity() {
 
     private fun showDialogResult() {
         binding?.tvChoice?.text = getString(R.string.choice_rematch)
+        binding?.ivLastChoiceCOM?.visibility = View.VISIBLE
+        binding?.ivLastChoicePlayer?.visibility = View.VISIBLE
 
         isPlay = true
         val dialog = ResultDialog(
