@@ -1,18 +1,30 @@
 package com.example.challenge7.gameplay
 
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.SoundPool
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.challenge7.R
+import com.example.challenge7.authentication.LoginActivity
 import com.example.challenge7.databinding.ActivityAgainstComBinding
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.GUNTING
+import com.example.challenge7.gameplay.AgainstComActivity.Companion.KERTAS
 import com.example.challenge7.gameplay.dialog.ResultDialog
 import com.example.challenge7.gameplay.viewModel.AgainstCpuViewModel
 import com.example.challenge7.history.room.HistoryDatabase
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 import java.sql.Timestamp
+import com.example.challenge7.setting.SettingActivity.Companion.round
+import kotlin.math.max
 
 class AgainstComActivity : AppCompatActivity() {
 
@@ -24,13 +36,31 @@ class AgainstComActivity : AppCompatActivity() {
 
     }
 
+    private val sharedPreferences by lazy { SharedPreferences(this) }
     var binding: ActivityAgainstComBinding? = null
+    val soundPool : SoundPool by lazy {
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+
+        SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .build()
+    }
+
     var roundCounter = 0
     var maxRound = 3
     var isPlay = false
     var comProgress = maxRound
     var playerProgress = maxRound
     var playerName = "Salman"
+    var soundWinId = 0
+    var soundLoseId = 0
+    var soundDrawId = 0
+    var soundThemeSongId = 0
+    var isAudio = true
+
 
     private val viewModel: AgainstCpuViewModel by viewModels()
     private lateinit var database:HistoryDatabase
@@ -46,11 +76,22 @@ class AgainstComActivity : AppCompatActivity() {
         database = HistoryDatabase.instance(this)
 
 
+        maxRound = sharedPreferences.round ?: 1
+        playerName = sharedPreferences.getUser()?.username ?: "Player"
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
+        soundWinId = soundPool.load(this,R.raw.win,1)
+        soundLoseId = soundPool.load(this,R.raw.lose,1)
+        soundDrawId = soundPool.load(this,R.raw.draw,1)
+        soundThemeSongId = soundPool.load(this,R.raw.themesong,1)
+
+        if(isAudio){
+            soundPool.play(soundThemeSongId,1f,1f,1,-1,1f)
+        }
 
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstComActivity, MenuActivity::class.java)
             startActivity(backToMenu)
+            finish()
         }
 
         binding?.pbCOM?.progress = maxRound
@@ -157,6 +198,9 @@ class AgainstComActivity : AppCompatActivity() {
             viewModel.saveGameHistory("Draw", modePermainan = "Player VS Com",timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         }
+        if(isAudio){
+            soundPool.play(soundDrawId,1f,1f,1,0,1f)
+        }
         Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show()
 
     }
@@ -170,6 +214,9 @@ class AgainstComActivity : AppCompatActivity() {
             viewModel.saveGameHistory("Draw", modePermainan = "Player VS Com",timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         }
+        if(isAudio){
+            soundPool.play(soundWinId,1f,1f,1,0,1f)
+        }
         Toast.makeText(this, "$playerName Menang", Toast.LENGTH_SHORT).show()
 
     }
@@ -181,6 +228,9 @@ class AgainstComActivity : AppCompatActivity() {
             val timeStamp = Timestamp(System.currentTimeMillis())
             viewModel.saveGameHistory("Draw", modePermainan = "Player VS Com",timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
+        }
+        if(isAudio){
+            soundPool.play(soundLoseId,1f,1f,1,0,1f)
         }
         Toast.makeText(this, "COM Menang", Toast.LENGTH_SHORT).show()
 
@@ -201,6 +251,11 @@ class AgainstComActivity : AppCompatActivity() {
             }
         )
         dialog.show(supportFragmentManager, "ResultDialog")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release()
     }
 
 

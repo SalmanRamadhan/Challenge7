@@ -1,6 +1,8 @@
 package com.example.challenge7.gameplay
 
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,13 +17,25 @@ import com.example.challenge7.gameplay.AgainstComActivity.Companion.KERTAS
 import com.example.challenge7.gameplay.dialog.ResultDialog
 import com.example.challenge7.gameplay.viewModel.AgainstPlayerViewModel
 import com.example.challenge7.history.room.HistoryDatabase
+import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 import java.sql.Timestamp
 
 class AgainstPlayerActivity : AppCompatActivity() {
 
-
+    private val sharedPreferences by lazy { SharedPreferences(this) }
     var binding: ActivityAgainstPlayerBinding? = null
+    val soundPool : SoundPool by lazy {
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+
+        SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .build()
+    }
+
     var roundCounter = 0
     var maxRound = 3
     var isPlay = false
@@ -30,6 +44,11 @@ class AgainstPlayerActivity : AppCompatActivity() {
     var comProgress = maxRound
     var playerProgress = maxRound
     var playerName = "Salman"
+    var soundWinId = 0
+    var soundLoseId = 0
+    var soundDrawId = 0
+    var soundThemeSongId = 0
+    var isAudio = true
 
     private val viewModel: AgainstPlayerViewModel by viewModels()
     private lateinit var database: HistoryDatabase
@@ -41,10 +60,17 @@ class AgainstPlayerActivity : AppCompatActivity() {
         database = HistoryDatabase.instance(this)
 
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
+        maxRound = sharedPreferences.round ?: 1
+        playerName = sharedPreferences.getUser()?.username ?: "Player"
+        soundWinId = soundPool.load(this,R.raw.win,1)
+        soundLoseId = soundPool.load(this,R.raw.lose,1)
+        soundDrawId = soundPool.load(this,R.raw.draw,1)
+        soundThemeSongId = soundPool.load(this,R.raw.themesong,1)
 
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstPlayerActivity, MenuActivity::class.java)
             startActivity(backToMenu)
+            finish()
         }
 
         binding?.pbCOM?.progress = maxRound
@@ -86,7 +112,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         }
 
         binding?.ivKertasCOM?.setOnClickListener {
-            if(isPlayer2Turn){
+            if (isPlayer2Turn) {
                 play(
                     player1Choice,
                     KERTAS
@@ -95,7 +121,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         }
 
         binding?.ivBatuCOM?.setOnClickListener {
-            if(isPlayer2Turn){
+            if (isPlayer2Turn) {
                 play(
                     player1Choice,
                     BATU
@@ -104,7 +130,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
         }
 
         binding?.ivGuntingCOM?.setOnClickListener {
-            if(isPlayer2Turn){
+            if (isPlayer2Turn) {
                 play(
                     player1Choice,
                     GUNTING
@@ -186,6 +212,9 @@ class AgainstPlayerActivity : AppCompatActivity() {
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
         }
+        if(isAudio){
+            soundPool.play(soundDrawId,1f,1f,1,0,1f)
+        }
         Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show()
 
 
@@ -202,7 +231,10 @@ class AgainstPlayerActivity : AppCompatActivity() {
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
         }
-        Toast.makeText(this, "Player Menang", Toast.LENGTH_SHORT).show()
+        if(isAudio){
+            soundPool.play(soundWinId,1f,1f,1,0,1f)
+        }
+        Toast.makeText(this, "$playerName Menang", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -217,6 +249,9 @@ class AgainstPlayerActivity : AppCompatActivity() {
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
         }
+        if(isAudio){
+            soundPool.play(soundLoseId,1f,1f,1,0,1f)
+        }
         Toast.makeText(this, "Player 2 Menang", Toast.LENGTH_SHORT).show()
 
     }
@@ -230,11 +265,15 @@ class AgainstPlayerActivity : AppCompatActivity() {
         val dialog = ResultDialog(
             when {
                 comProgress == playerProgress -> getString(R.string.result_seri)
-                comProgress > playerProgress -> getString(R.string.result_com)
+                comProgress > playerProgress -> "Player 2"
                 comProgress < playerProgress -> playerName
                 else -> ""
             }
         )
         dialog.show(supportFragmentManager, "ResultDialog")
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release()
     }
 }

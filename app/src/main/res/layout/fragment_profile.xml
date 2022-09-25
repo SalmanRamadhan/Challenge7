@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/civProfile"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -95,6 +95,7 @@
         app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
     <TextView
+        android:id="@+id/tvLogout"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/buttton_logout"
