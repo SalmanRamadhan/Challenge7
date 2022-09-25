@@ -2,6 +2,8 @@ package com.example.challenge7.gameplay
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +34,16 @@ class AgainstComActivity : AppCompatActivity() {
 
     private val sharedPreferences by lazy { SharedPreferences(this) }
     var binding: ActivityAgainstComBinding? = null
+    val soundPool : SoundPool by lazy {
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+
+        SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .build()
+    }
 
     var roundCounter = 0
     var maxRound = 3
@@ -39,6 +51,12 @@ class AgainstComActivity : AppCompatActivity() {
     var comProgress = maxRound
     var playerProgress = maxRound
     var playerName = "Salman"
+    var soundWinId = 0
+    var soundLoseId = 0
+    var soundDrawId = 0
+    var soundThemeSongId = 0
+    var isAudio = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +66,19 @@ class AgainstComActivity : AppCompatActivity() {
         maxRound = sharedPreferences.round ?: 1
         playerName = sharedPreferences.getUser()?.username ?: "Player"
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
+        soundWinId = soundPool.load(this,R.raw.win,1)
+        soundLoseId = soundPool.load(this,R.raw.lose,1)
+        soundDrawId = soundPool.load(this,R.raw.draw,1)
+        soundThemeSongId = soundPool.load(this,R.raw.themesong,1)
+
+        if(isAudio){
+            soundPool.play(soundThemeSongId,1f,1f,1,-1,1f)
+        }
 
         binding?.ivHome?.setOnClickListener {
             val backToMenu = Intent(this@AgainstComActivity, MenuActivity::class.java)
             startActivity(backToMenu)
+            finish()
         }
 
         binding?.pbCOM?.progress = maxRound
@@ -156,6 +183,9 @@ class AgainstComActivity : AppCompatActivity() {
         if (roundCounter == maxRound) {
             showDialogResult()
         }
+        if(isAudio){
+            soundPool.play(soundDrawId,1f,1f,1,0,1f)
+        }
         Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show()
 
     }
@@ -167,6 +197,9 @@ class AgainstComActivity : AppCompatActivity() {
         if (roundCounter == maxRound) {
             showDialogResult()
         }
+        if(isAudio){
+            soundPool.play(soundWinId,1f,1f,1,0,1f)
+        }
         Toast.makeText(this, "$playerName Menang", Toast.LENGTH_SHORT).show()
 
     }
@@ -176,6 +209,9 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.pbPlayer?.progress = playerProgress
         if (roundCounter == maxRound) {
             showDialogResult()
+        }
+        if(isAudio){
+            soundPool.play(soundLoseId,1f,1f,1,0,1f)
         }
         Toast.makeText(this, "COM Menang", Toast.LENGTH_SHORT).show()
 
@@ -196,6 +232,11 @@ class AgainstComActivity : AppCompatActivity() {
             }
         )
         dialog.show(supportFragmentManager, "ResultDialog")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release()
     }
 
 
