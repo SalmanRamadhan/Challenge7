@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.challenge7.R
 import com.example.challenge7.authentication.LoginActivity
@@ -35,7 +36,6 @@ class ProfileFragment : Fragment() {
 
         binding?.etUserName?.setText(userToShow.username)
         binding?.etEmail?.setText(userToShow.email)
-
         binding?.tvLogout?.setOnClickListener {
             sharedPreferences.setStatusLogin(false)
 
@@ -43,8 +43,20 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
+        binding?.civProfile?.setOnClickListener {
+            val intentPickImage = Intent(Intent.ACTION_PICK)
+            intentPickImage.type = "image/*"
+            startActivity(intentPickImage)
+        }
+        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+            }
+        }
 
-        var imageView = binding?.civProfile
+
+        val imageView = binding?.civProfile
 
         Glide.with(this@ProfileFragment)
             .load(userToShow.photo)
