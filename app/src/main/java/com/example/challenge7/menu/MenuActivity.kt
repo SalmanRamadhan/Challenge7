@@ -12,7 +12,7 @@ class MenuActivity : AppCompatActivity() {
 
 
     private var binding: ActivityMenuBinding? = null
-    private val viewModel: HistoryViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,12 +1,8 @@
 package com.example.challenge7.setting
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
-import com.example.challenge7.R
-import com.example.challenge7.authentication.SignUpFragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.challenge7.databinding.ActivitySettingBinding
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
@@ -73,7 +69,7 @@ class SettingActivity : AppCompatActivity() {
         binding?.btnSave?.setOnClickListener {
             if (isRoundFilled()) {
                 //save the round
-                SharedPreferences?.let {
+                SharedPreferences.let {
                     it.round = binding?.etGameRound?.text.toString().toInt()
                 }
                 val i = Intent(this, MenuActivity::class.java)

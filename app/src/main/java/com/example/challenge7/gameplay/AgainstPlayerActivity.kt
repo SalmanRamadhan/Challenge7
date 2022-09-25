@@ -13,6 +13,7 @@ import com.example.challenge7.gameplay.AgainstComActivity.Companion.BATU
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.GUNTING
 import com.example.challenge7.gameplay.AgainstComActivity.Companion.KERTAS
 import com.example.challenge7.gameplay.dialog.ResultDialog
+import com.example.challenge7.gameplay.viewModel.AgainstPlayerViewModel
 import com.example.challenge7.history.room.HistoryDatabase
 import com.example.challenge7.menu.MenuActivity
 import java.sql.Timestamp
@@ -30,14 +31,14 @@ class AgainstPlayerActivity : AppCompatActivity() {
     var playerProgress = maxRound
     var playerName = "Salman"
 
-//    private val viewModel: AgainstPlayerViewModel by viewModels()
+    private val viewModel: AgainstPlayerViewModel by viewModels()
     private lateinit var database: HistoryDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAgainstPlayerBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-//        database = HistoryDatabase.instance(this)
+        database = HistoryDatabase.instance(this)
 
         binding?.tvChoice?.text = getString(R.string.choice_silahkan, playerName)
 
@@ -179,8 +180,8 @@ class AgainstPlayerActivity : AppCompatActivity() {
     private fun draw() {
 
         if (roundCounter == maxRound) {
-//            val timeStamp = Timestamp(System.currentTimeMillis())
-//            viewModel.saveGameHistory("Draw",timeStamp.time, playerName, database.getHistoryDao())
+            val timeStamp = Timestamp(System.currentTimeMillis())
+            viewModel.saveGameHistory("Win", "Player VS Player" , timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
@@ -195,8 +196,8 @@ class AgainstPlayerActivity : AppCompatActivity() {
         comProgress -= 1
         binding?.pbCOM?.progress = comProgress
         if (roundCounter == maxRound) {
-//            val timeStamp = Timestamp(System.currentTimeMillis())
-//            viewModel.saveGameHistory("Win",timeStamp.time, playerName, database.getHistoryDao())
+            val timeStamp = Timestamp(System.currentTimeMillis())
+            viewModel.saveGameHistory("Win", "Player VS Player" , timeStamp.time, "heri", database.getHistoryDao())
             showDialogResult()
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE
@@ -209,8 +210,9 @@ class AgainstPlayerActivity : AppCompatActivity() {
         playerProgress -= 1
         binding?.pbPlayer?.progress = playerProgress
         if (roundCounter == maxRound) {
-//            val timeStamp = Timestamp(System.currentTimeMillis())
-//            viewModel.saveGameHistory("Lose",timeStamp.time, playerName, database.getHistoryDao())
+            val timeStamp = Timestamp(System.currentTimeMillis())
+            viewModel.saveGameHistory("Win", "Player VS Player" , timeStamp.time, "heri", database.getHistoryDao())
+
             showDialogResult()
         } else {
             binding?.tvReadyPlayer?.visibility = View.GONE

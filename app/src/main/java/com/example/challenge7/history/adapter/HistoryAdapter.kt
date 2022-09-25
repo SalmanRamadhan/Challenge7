@@ -30,8 +30,10 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
         val sdfTime = SimpleDateFormat("hh:mm:ss", Locale("id", "ID"))
 
         holder.tvHasilPermainan.text = data.history.hasilPermainan
+        holder.tvModePermainan.text = data.history.modePermainan
         holder.tvDate.text = sdfDate.format(date)
         holder.tvHour.text = sdfTime.format(date)
+
         holder.cbCheck.isChecked = data.checked
         holder.cbCheck.setOnCheckedChangeListener { _, checked ->
             data.checked = checked
@@ -39,9 +41,14 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
             val itemCheckedSum = listHistory.filter { it.checked }.size
             onHistoryCheckedListener(checked, itemCheckedSum)
         }
+
+//        holder.itemView.setOnClickListener {
+//
+//        }
     }
 
     override fun getItemCount() = listHistory.size
+
 
     fun setData(data: List<History>) {
         listHistory.apply {
@@ -70,6 +77,7 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvHasilPermainan: TextView = itemView.findViewById(R.id.tvHasilPermainan)
+        val tvModePermainan : TextView = itemView.findViewById(R.id.tvHasilPermainan2)
         val tvDate: TextView = itemView.findViewById(R.id.tvDate)
         val tvHour: TextView = itemView.findViewById(R.id.tvHour)
         val cbCheck: CheckBox = itemView.findViewById(R.id.cbDelete)

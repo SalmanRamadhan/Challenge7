@@ -6,7 +6,7 @@ import com.example.challenge7.history.room.History
 import com.example.challenge7.history.room.HistoryDao
 import kotlinx.coroutines.launch
 
-class AgainstCpuViewModel : ViewModel() {
+class AgainstPlayerViewModel : ViewModel() {
 
 
     fun saveGameHistory(

@@ -4,11 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.challenge7.R
 import com.example.challenge7.databinding.FragmentHistoryBinding
 import com.example.challenge7.history.adapter.HistoryAdapter
+import com.example.challenge7.history.room.History
 import com.example.challenge7.history.room.HistoryDatabase
 
 
@@ -18,6 +23,7 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HistoryViewModel by activityViewModels()
     private lateinit var database: HistoryDatabase
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +36,43 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHistoryBinding.inflate(layoutInflater)
-
         return (binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.histories.observe(viewLifecycleOwner) {
-            binding.rvHistory.apply {
-                val historyAdapter = HistoryAdapter { checked, itemCheckedHistorySum ->
-                    binding.cbDelete.isChecked = itemCheckedHistorySum == it.size
-                    if (itemCheckedHistorySum > 0) {
-                        binding.tvDelete.visibility = View.VISIBLE
-                    } else
-                        binding.tvDelete.visibility = View.GONE
 
+        binding.ivDelete.visibility = View.VISIBLE
+        binding.cbDeleteAll.visibility = View.INVISIBLE
+        binding.clDeleteAll.visibility = View.GONE
+        binding.rvHistory.visibility = View.VISIBLE
+
+
+
+
+        viewModel.histories.observe(viewLifecycleOwner) {
+
+            binding.ivDelete.setOnClickListener {
+                historyAvailable()
+            }
+            binding.tvCancel.setOnClickListener {
+                historyEmpty()
+            }
+
+
+            binding.rvHistory.apply {
+                val historyAdapter = HistoryAdapter { _, itemCheckedHistorySum ->
+                    binding.cbDeleteAll.isChecked = itemCheckedHistorySum == it.size
+                    if (itemCheckedHistorySum != 0) {
+                        binding.tvDelete.visibility = View.VISIBLE
+                    } else if(itemCheckedHistorySum == 0){
+                        binding.cbDeleteAll.isChecked = false
+                    }else{
+                        binding.tvDelete.visibility = View.GONE
+                    }
                 }
-                binding.cbDelete.setOnCheckedChangeListener { _, checked ->
+                binding.cbDeleteAll.setOnCheckedChangeListener { _, checked ->
                     historyAdapter.setAllChecked(checked)
                     binding.tvDelete.visibility = if (checked) {
                         View.VISIBLE
@@ -71,6 +96,26 @@ class HistoryFragment : Fragment() {
         }
 
 
+    }
+
+    fun historyAvailable(){
+        binding.apply {
+            rvHistory.visibility = View.VISIBLE
+            ivDelete.visibility = View.VISIBLE
+            tvCancel.visibility = View.VISIBLE
+            clDeleteAll.visibility = View.VISIBLE
+            cbDeleteAll.visibility = View.VISIBLE
+        }
+    }
+
+    fun historyEmpty(){
+        binding.apply {
+            clDeleteAll.visibility = View.GONE
+            rvHistory.visibility = View.GONE
+            ivDelete.visibility = View.GONE
+            tvCancel.visibility = View.GONE
+            cbDeleteAll.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {
