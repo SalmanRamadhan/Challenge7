@@ -42,4 +42,10 @@
     <string name="input_number_max_5_round">Input Number Max 5 Round</string>
     <string name="save">Save</string>
     <string name="home">Home</string>
+    <string name="result_menang">MENANG</string>
+    <string name="result_seri">Seri!</string>
+    <string name="result_com">COM</string>
+    <string name="choice_rematch">Rematch?</string>
+    <string name="choice_silahkan">%1$s Silahkan Pilih</string>
+    <string name="player_2">PLayer 2</string>
 </resources>
