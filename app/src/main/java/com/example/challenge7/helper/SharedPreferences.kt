@@ -10,6 +10,7 @@ class SharedPreferences(activity: FragmentActivity){
 
     companion object {
         private const val ROUND_GAME = "ROUND_GAME"
+        private const val MUSIC = "MUSIC"
 
         val login = "Login"
         val myPref = "Main_Pref"
@@ -26,6 +27,12 @@ class SharedPreferences(activity: FragmentActivity){
         get() = sharedPreference.getInt(ROUND_GAME, 1)
         set(value) {
             sharedPreference.edit().putInt(ROUND_GAME, value!!).apply()
+        }
+
+    var music: Boolean?
+        get() = sharedPreference.getBoolean(MUSIC, true)
+        set(value) {
+            sharedPreference.edit().putBoolean(MUSIC, value!!).apply()
         }
 
     fun setStatusLogin(status: Boolean){

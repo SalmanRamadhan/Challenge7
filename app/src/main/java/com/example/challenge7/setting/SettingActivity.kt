@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.challenge7.R
 import com.example.challenge7.authentication.SignUpFragment
 import com.example.challenge7.databinding.ActivitySettingBinding
@@ -46,9 +47,9 @@ class SettingActivity : AppCompatActivity() {
     private fun setMusic() {
         val music = binding?.sWSound?.isChecked
         if (music == true) {
-            //play music
+            SharedPreferences.music = true
         } else {
-            //stop music
+            SharedPreferences.music = false
         }
     }
 
@@ -76,6 +77,7 @@ class SettingActivity : AppCompatActivity() {
                 SharedPreferences?.let {
                     it.round = binding?.etGameRound?.text.toString().toInt()
                 }
+                Toast.makeText(this, "Game Round Saved", Toast.LENGTH_LONG).show()
                 val i = Intent(this, MenuActivity::class.java)
                 startActivity(i)
             } else {
