@@ -7,6 +7,8 @@
     android:background="@color/maincolor"
     tools:context=".menu.ProfileFragment">
 
+
+
     <View
         android:id="@+id/viewTopBar"
         android:layout_width="match_parent"
