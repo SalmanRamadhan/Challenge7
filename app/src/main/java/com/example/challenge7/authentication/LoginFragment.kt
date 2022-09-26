@@ -1,5 +1,6 @@
 package com.example.challenge7.authentication
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,7 +23,14 @@ class LoginFragment : Fragment() {
 
 
     var binding: FragmentLoginBinding? = null
-    lateinit var sph: SharedPreferences
+    private val sharedPreferences by lazy {
+        SharedPreferences(requireActivity())
+    }
+    val progressDialog: ProgressDialog by lazy {
+        ProgressDialog(context)
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +38,6 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
-        sph = SharedPreferences(requireActivity())
 
         binding?.btnLogin?.setOnClickListener {
             login()
@@ -50,6 +57,13 @@ class LoginFragment : Fragment() {
         val email = binding?.edtEmail?.text.toString()
         val pass = binding?.edtPassword?.text.toString()
 
+        with(progressDialog) {
+
+            setMessage("Loading...")
+            setCancelable(false)
+            show()
+        }
+
         validation(email, pass)
 
         NetworkHelper.instance.login(email,pass).enqueue(object : Callback<GetUserResponse>{
@@ -60,17 +74,17 @@ class LoginFragment : Fragment() {
                 val respon = response.body()
 
                 if (response.isSuccessful) {
-                    if (respon?.success == true) {
-                        sph.setStatusLogin(true)
-                        sph.setUser(respon?.data!!)
+                    if (response.code() == 200) {
+                        sharedPreferences.setStatusLogin(true)
+                        sharedPreferences.setUser(respon?.data!!)
 
                         startActivity(Intent(activity, MenuActivity::class.java))
                         Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
                         activity?.finish()
-                    } else{
-                        response.errorBody()?.let {
-                            Toast.makeText(activity, it.string(), Toast.LENGTH_LONG).show()
-                        }
+                    } else {
+                        progressDialog.dismiss()
+                        Toast.makeText(activity, "Email atau Password Salah", Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
             }
@@ -84,11 +98,15 @@ class LoginFragment : Fragment() {
     private fun validation(email: String, pass: String) {
 
         if (email.isEmpty()) {
+            progressDialog.dismiss()
             binding?.edtEmail?.error = "Isi dulu !"
+            return
         }
 
         if (pass.isEmpty()) {
+            progressDialog.dismiss()
             binding?.edtPassword?.error = "Isi dulu !"
+            return
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.challenge7.menu
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,10 @@ class HomeFragment : Fragment() {
     private val sharedPreferences by lazy {
         SharedPreferences(requireActivity())
     }
+    val progressDialog: ProgressDialog by lazy {
+        ProgressDialog(context)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,6 +81,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun logout(){
+
+        with(progressDialog) {
+
+            setMessage("Loading...")
+            setCancelable(false)
+            show()
+        }
+
             sharedPreferences.setStatusLogin(false)
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)

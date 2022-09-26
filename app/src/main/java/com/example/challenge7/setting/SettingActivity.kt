@@ -41,10 +41,10 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun setMusic() {
-        SharedPreferences.let { sp ->
-            binding?.sWSound?.isChecked = sp.music == true
+        SharedPreferences.let {
+            binding?.sWSound?.isChecked = it.music == true
             binding?.sWSound?.setOnCheckedChangeListener { _, isChecked ->
-                sp.music = isChecked
+                it.music = isChecked
             }
         }
     }
