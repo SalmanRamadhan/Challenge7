@@ -88,7 +88,7 @@ class LoginFragment : Fragment() {
                     }
                 } else {
                     progressDialog.dismiss()
-                    Toast.makeText(activity, " 2 Email atau Password Salah", Toast.LENGTH_LONG)
+                    Toast.makeText(activity, "  Email atau Password Salah", Toast.LENGTH_LONG)
                         .show()
                 }
             }

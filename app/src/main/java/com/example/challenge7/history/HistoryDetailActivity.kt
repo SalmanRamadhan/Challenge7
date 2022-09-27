@@ -1,5 +1,6 @@
 package com.example.challenge7.history
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,12 +14,12 @@ import java.util.*
 
 class HistoryDetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityHistoryDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val historyDetail = intent.getParcelableExtra(HistoryFragment.DETAIL_HISTORY, History::class.java)
         val historyDetail = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(DETAIL_HISTORY, History::class.java)
         } else {
@@ -30,6 +31,8 @@ class HistoryDetailActivity : AppCompatActivity() {
         val date = binding.tvDate
         val hour = binding.tvHour
         val userName = binding.tvUserName
+        val text = "${historyDetail?.userName} ${historyDetail?.hasilPermainan}"
+
 
         val sdfDate = SimpleDateFormat("EEEE, dd MMM yyyy", Locale("id", "ID"))
         val sdfTime = SimpleDateFormat("hh:mm:ss", Locale("id", "ID"))
@@ -38,8 +41,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         modePermainan.text = historyDetail?.modePermainan
         date.text = sdfDate.format(historyDetail?.timeStamp)
         hour.text = sdfTime.format(historyDetail?.timeStamp)
-        userName.text = historyDetail?.userName
-
+        userName.text = text
         binding.ivBack.setOnClickListener {
             finish()
         }
