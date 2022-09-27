@@ -3,6 +3,7 @@ package com.example.challenge7.authentication
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.challenge7.api.NetworkHelper
 import com.example.challenge7.databinding.FragmentLoginBinding
+import com.example.challenge7.helper.NetworkConnection
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 import com.example.challenge7.model.GetUserResponse

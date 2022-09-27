@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.challenge7.api.NetworkHelper
 import com.example.challenge7.databinding.FragmentSignUpBinding
+import com.example.challenge7.helper.NetworkConnection
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 import com.example.challenge7.model.GetUserResponse
@@ -176,7 +177,7 @@ class SignUpFragment : Fragment() {
                 return
             }
             //password harus mengandung minimal 1 karakter spesial
-            !pass.matches(".*[!@#\$%^&*()_+].*".toRegex()) -> {
+            !pass.matches(".*[!@#\$%^&*()_+.,].*".toRegex()) -> {
                 progressDialog.dismiss()
                 binding?.edtPassword?.error = "Password harus mengandung minimal 1 karakter spesial"
                 return
