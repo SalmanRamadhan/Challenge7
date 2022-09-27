@@ -63,37 +63,45 @@ class SignUpFragment : Fragment() {
 
         validation(email,username,pass,rePass)
 
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                NetworkHelper.instance.register(email,username,pass).enqueue(object : Callback<GetUserResponse> {
+                    override fun onResponse(
+                        call: Call<GetUserResponse>,
+                        response: Response<GetUserResponse>
+                    ) {
 
-        NetworkHelper.instance.register(email,username,pass).enqueue(object : Callback<GetUserResponse> {
-            override fun onResponse(
-                call: Call<GetUserResponse>,
-                response: Response<GetUserResponse>
-            ) {
-
-                val respon = response.body()
-                if (response.isSuccessful) {
-                    if (respon?.success == true) {
-                            sharedPreferences.setStatusLogin(true)
-                            //mengarahkan ke fragment login
-                            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-                            fragmentTransaction?.add(((view as ViewGroup).parent as View).id,LoginFragment())
-                            fragmentTransaction?.commit()
-                            Toast.makeText(activity, "Berhasil Register", Toast.LENGTH_LONG).show()
-                    } else{
+                        val respon = response.body()
+                        if (response.isSuccessful) {
+                            if (respon?.success == true) {
+                                sharedPreferences.setStatusLogin(true)
+                                //mengarahkan ke fragment login
+                                val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+                                fragmentTransaction?.add(((view as ViewGroup).parent as View).id,LoginFragment())
+                                fragmentTransaction?.commit()
+                                Toast.makeText(activity, "Register Success", Toast.LENGTH_LONG).show()
+                            } else{
 //                        progressDialog.dismiss()
-                        Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
-                    }
-                }else{
+                                Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
+                            }
+                        }else{
 //                    progressDialog.dismiss()
-                    Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
-                }
-                progressDialog.dismiss()
-            }
+                            Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
+                        }
+                        progressDialog.dismiss()
+                    }
 
-            override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
-                Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
+                    override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
+                        Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
+                    }
+                })
+            } else {
+                progressDialog.dismiss()
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
             }
-        })
+        }
+
     }
 
     private fun validation(email: String, username: String, pass: String, rePass: String) {

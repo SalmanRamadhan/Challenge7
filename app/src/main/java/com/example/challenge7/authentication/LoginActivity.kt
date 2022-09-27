@@ -18,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
 
     val fragmentLogin: Fragment = LoginFragment()
     val fragmentSignUp: Fragment = SignUpFragment()
-    val fragmentHome: Fragment = HomeFragment()
 
     private val SharedPreferences by lazy { SharedPreferences(this) }
 
