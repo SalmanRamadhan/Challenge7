@@ -18,6 +18,7 @@ class HistoryAdapter(
 ) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     private var listHistory = mutableListOf<HistoryCheck>()
+    private var showCheckBox: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
@@ -32,11 +33,13 @@ class HistoryAdapter(
         val sdfDate = SimpleDateFormat("EEEE, dd MMM yyyy", Locale("id", "ID"))
         val sdfTime = SimpleDateFormat("hh:mm:ss", Locale("id", "ID"))
 
+
+        holder.cbCheck.visibility = if (showCheckBox) View.VISIBLE else View.GONE
+
         holder.tvHasilPermainan.text = data.history.hasilPermainan
         holder.tvModePermainan.text = data.history.modePermainan
         holder.tvDate.text = sdfDate.format(date)
         holder.tvHour.text = sdfTime.format(date)
-
         holder.cbCheck.isChecked = data.checked
         holder.cbCheck.setOnCheckedChangeListener { _, checked ->
             data.checked = checked
@@ -77,6 +80,11 @@ class HistoryAdapter(
         }.map {
             it.history
         }
+    }
+
+    fun showHideCheckBox(show: Boolean){
+        showCheckBox = show
+        notifyItemRangeChanged(0, listHistory.size)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
