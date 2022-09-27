@@ -68,8 +68,8 @@ class SignUpFragment : Fragment() {
                 call: Call<GetUserResponse>,
                 response: Response<GetUserResponse>
             ) {
-                val respon = response.body()
 
+                val respon = response.body()
                 if (response.isSuccessful) {
                     if (respon?.success == true) {
                             sharedPreferences.setStatusLogin(true)
@@ -79,10 +79,14 @@ class SignUpFragment : Fragment() {
                             fragmentTransaction?.commit()
                             Toast.makeText(activity, "Berhasil Register", Toast.LENGTH_LONG).show()
                     } else{
-                        progressDialog.dismiss()
+//                        progressDialog.dismiss()
                         Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
                     }
+                }else{
+//                    progressDialog.dismiss()
+                    Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
                 }
+                progressDialog.dismiss()
             }
 
             override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {

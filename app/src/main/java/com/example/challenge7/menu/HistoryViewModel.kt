@@ -14,12 +14,11 @@ class HistoryViewModel : ViewModel() {
     private val _histories = MutableLiveData<List<History>>(listOf())
     val histories: LiveData<List<History>> = _histories
 
-//    var userName = blablbalba dari sharedpreference
+
 
     fun getHistories(historyDao: HistoryDao,userName: String) {
         viewModelScope.launch {
             _histories.postValue(historyDao.getHistories(userName))
-//            println("pesan -> ${_histories.value?.size}")
         }
     }
 
