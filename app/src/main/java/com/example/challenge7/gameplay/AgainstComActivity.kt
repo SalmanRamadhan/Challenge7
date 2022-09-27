@@ -4,21 +4,20 @@ package com.example.challenge7.gameplay
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.SoundPool
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.challenge7.R
 import com.example.challenge7.databinding.ActivityAgainstComBinding
 import com.example.challenge7.gameplay.dialog.ResultDialog
 import com.example.challenge7.gameplay.viewModel.AgainstCpuViewModel
-import com.example.challenge7.history.room.HistoryDatabase
 import com.example.challenge7.helper.SharedPreferences
+import com.example.challenge7.history.room.HistoryDatabase
 import com.example.challenge7.menu.MenuActivity
 import java.sql.Timestamp
-import kotlin.math.max
 
 
 class AgainstComActivity : AppCompatActivity() {
@@ -242,7 +241,6 @@ class AgainstComActivity : AppCompatActivity() {
         binding?.tvChoice?.text = getString(R.string.choice_rematch)
         binding?.ivLastChoiceCOM?.visibility = View.VISIBLE
         binding?.ivLastChoicePlayer?.visibility = View.VISIBLE
-
         val timeStamp = Timestamp(System.currentTimeMillis())
         viewModel.saveGameHistory(
             when{
@@ -253,7 +251,7 @@ class AgainstComActivity : AppCompatActivity() {
                 },
             modePermainan = "Player VS Com",
             timeStamp.time,
-            playerName,
+            "heri",
             database.getHistoryDao()
         )
 

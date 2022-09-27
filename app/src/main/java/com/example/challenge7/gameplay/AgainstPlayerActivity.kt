@@ -268,7 +268,7 @@ class AgainstPlayerActivity : AppCompatActivity() {
             },
             modePermainan = "Player VS Player",
             timeStamp.time,
-            playerName,
+            "heri",
             database.getHistoryDao()
         )
 
