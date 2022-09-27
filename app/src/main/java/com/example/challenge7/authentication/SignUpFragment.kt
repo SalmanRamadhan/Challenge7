@@ -83,11 +83,8 @@ class SignUpFragment : Fragment() {
                                 Toast.makeText(activity, "Register Success", Toast.LENGTH_LONG).show()
                             } else{
 //                        progressDialog.dismiss()
-                                Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(activity, "Register Failed", Toast.LENGTH_LONG).show()
                             }
-                        }else{
-//                    progressDialog.dismiss()
-                            Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
                         }
                         progressDialog.dismiss()
                     }

@@ -79,15 +79,17 @@ class LoginFragment : Fragment() {
 
                             println("pesan -> on Respons")
                             if (response.isSuccessful) {
-                                sharedPreferences.setStatusLogin(true)
-                                sharedPreferences.setUser(respon?.data!!)
+                                if(respon?.success == true) {
+                                    sharedPreferences.setStatusLogin(true)
+                                    sharedPreferences.setUser(respon?.data!!)
 
-                                startActivity(Intent(activity, MenuActivity::class.java))
-                                Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
-                                activity?.finish()
-                            } else {
-                                progressDialog.dismiss()
-                                Toast.makeText(activity,"  Email atau Password Salah", Toast.LENGTH_LONG).show()
+                                    startActivity(Intent(activity, MenuActivity::class.java))
+                                    Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
+                                    activity?.finish()
+                                }else {
+                                    progressDialog.dismiss()
+                                    Toast.makeText(activity,"  Email atau Password Salah", Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
 
