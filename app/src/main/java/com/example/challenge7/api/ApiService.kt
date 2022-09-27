@@ -1,10 +1,9 @@
 package com.example.challenge7.api
 
+import com.example.challenge7.model.GetUserProfileResponse
 import com.example.challenge7.model.GetUserResponse
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -22,4 +21,9 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<GetUserResponse>
+
+    @GET("users")
+    fun getUser(
+        @Header("Authorization") token: String
+    ): Call<GetUserProfileResponse>
 }

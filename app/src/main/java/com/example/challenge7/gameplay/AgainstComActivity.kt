@@ -32,8 +32,7 @@ class AgainstComActivity : AppCompatActivity() {
     }
 
     private val sharedPreferences by lazy { SharedPreferences(this) }
-    var binding: ActivityAgainstComBinding? = null
-    val soundPool: SoundPool by lazy {
+    private val soundPool: SoundPool by lazy {
         val audioAttributes = AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
             .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -43,6 +42,17 @@ class AgainstComActivity : AppCompatActivity() {
             .setAudioAttributes(audioAttributes)
             .build()
     }
+   private val soundPoolTheme: SoundPool by lazy {
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+
+        SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .build()
+    }
+    var binding: ActivityAgainstComBinding? = null
 
     var roundCounter = 0
     var maxRound = 0
@@ -74,10 +84,12 @@ class AgainstComActivity : AppCompatActivity() {
         soundWinId = soundPool.load(this, R.raw.win, 1)
         soundLoseId = soundPool.load(this, R.raw.lose, 1)
         soundDrawId = soundPool.load(this, R.raw.draw, 1)
-        soundThemeSongId = soundPool.load(this, R.raw.themesong, 1)
+        soundThemeSongId = soundPoolTheme.load(this, R.raw.themesong, 1)
 
-        if (isAudio) {
-            soundPool.play(soundThemeSongId, 1f, 1f, 1, -1, 1f)
+        soundPoolTheme.setOnLoadCompleteListener { soundPool, i, i2 ->
+            if (isAudio) {
+                soundPool.play(soundThemeSongId, 1f, 1f, 1, -1, 1f)
+            }
         }
 
         binding?.ivHome?.setOnClickListener {
@@ -260,6 +272,7 @@ class AgainstComActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         soundPool.release()
+        soundPoolTheme.release()
     }
 
 
