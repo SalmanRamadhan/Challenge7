@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.challenge7.api.NetworkHelper
 import com.example.challenge7.databinding.FragmentSignUpBinding
+import com.example.challenge7.helper.NetworkConnection
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 import com.example.challenge7.model.GetUserResponse
@@ -62,33 +63,39 @@ class SignUpFragment : Fragment() {
 
         validation(email,username,pass,rePass)
 
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                NetworkHelper.instance.register(email,username,pass).enqueue(object : Callback<GetUserResponse> {
+                    override fun onResponse(
+                        call: Call<GetUserResponse>,
+                        response: Response<GetUserResponse>
+                    ) {
+                        val respon = response.body()
 
-        NetworkHelper.instance.register(email,username,pass).enqueue(object : Callback<GetUserResponse> {
-            override fun onResponse(
-                call: Call<GetUserResponse>,
-                response: Response<GetUserResponse>
-            ) {
-                val respon = response.body()
-
-                if (response.isSuccessful) {
-                    if (respon?.success == true) {
-                            sharedPreferences.setStatusLogin(true)
-                            //mengarahkan ke fragment login
-                            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-                            fragmentTransaction?.add(((view as ViewGroup).parent as View).id,LoginFragment())
-                            fragmentTransaction?.commit()
-                            Toast.makeText(activity, "Berhasil Register", Toast.LENGTH_LONG).show()
-                    } else{
-                        progressDialog.dismiss()
-                        Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
+                        if (response.isSuccessful) {
+                            if (respon?.success == true) {
+                                sharedPreferences.setStatusLogin(true)
+                                //mengarahkan ke fragment login
+                                val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+                                fragmentTransaction?.add(((view as ViewGroup).parent as View).id,LoginFragment())
+                                fragmentTransaction?.commit()
+                                Toast.makeText(activity, "Berhasil Register", Toast.LENGTH_LONG).show()
+                            } else{
+                                progressDialog.dismiss()
+                                Toast.makeText(activity, "${respon?.errors}", Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
-                }
-            }
 
-            override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
-                Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
+                    override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
+                        Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
+                    }
+                })
+            } else {
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 
     private fun validation(email: String, username: String, pass: String, rePass: String) {
@@ -172,7 +179,7 @@ class SignUpFragment : Fragment() {
                 return
             }
             //password harus mengandung minimal 1 karakter spesial
-            !pass.matches(".*[!@#\$%^&*()_+].*".toRegex()) -> {
+            !pass.matches(".*[!@#\$%^&*()_+.,].*".toRegex()) -> {
                 progressDialog.dismiss()
                 binding?.edtPassword?.error = "Password harus mengandung minimal 1 karakter spesial"
                 return
