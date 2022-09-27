@@ -44,9 +44,12 @@ class SplashScreen : AppCompatActivity() {
 
         soundId = soundPool.load(this, R.raw.splashscreen, 1)
 
-        if (isAudio) {
-            soundPool.play(soundId, 1f, 1f, 1, 1, 1f)
+        soundPool.setOnLoadCompleteListener { soundPool, i, i2 ->
+            if (isAudio && i2 == 0) {
+                soundPool.play(i, 1f, 1f, 1, 0, 1f)
+            }
         }
+
         Handler(Looper.getMainLooper()).postDelayed({
             if (sharedPreferences.getStatusLogin()) {
                 startActivity(Intent(this, MenuActivity::class.java))
