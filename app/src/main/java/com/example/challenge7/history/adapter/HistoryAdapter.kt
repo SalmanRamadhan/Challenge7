@@ -5,13 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challenge7.R
 import com.example.challenge7.history.room.History
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Unit) :
+class HistoryAdapter(
+    private val onHistoryCheckedListener: (Boolean, Int) -> Unit,
+    private val onClickListener: (History) -> Unit
+) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     private var listHistory = mutableListOf<HistoryCheck>()
 
@@ -20,8 +24,7 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
             LayoutInflater.from(parent.context).inflate(R.layout.item_history, parent, false)
         return ViewHolder(itemView)
     }
-
-
+    
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = listHistory[position]
 
@@ -42,9 +45,10 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
             onHistoryCheckedListener(checked, itemCheckedSum)
         }
 
-//        holder.itemView.setOnClickListener {
-//
-//        }
+        holder.itemView.setOnClickListener {
+//            Toast.makeText(it.context, data.history.hasilPermainan, Toast.LENGTH_SHORT).show()
+            onClickListener(data.history)
+        }
     }
 
     override fun getItemCount() = listHistory.size
@@ -60,14 +64,14 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
         }
     }
 
-    fun setAllChecked(checked: Boolean){
+    fun setAllChecked(checked: Boolean) {
         listHistory.forEach {
             it.checked = checked
         }
-        notifyItemRangeChanged(0,listHistory.size)
+        notifyItemRangeChanged(0, listHistory.size)
     }
 
-    fun getAllChecked():List<History>{
+    fun getAllChecked(): List<History> {
         return listHistory.filter {
             it.checked
         }.map {
@@ -77,7 +81,7 @@ class HistoryAdapter(private val onHistoryCheckedListener: (Boolean, Int) -> Uni
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvHasilPermainan: TextView = itemView.findViewById(R.id.tvHasilPermainan)
-        val tvModePermainan : TextView = itemView.findViewById(R.id.tvHasilPermainan2)
+        val tvModePermainan: TextView = itemView.findViewById(R.id.tvHasilPermainan2)
         val tvDate: TextView = itemView.findViewById(R.id.tvDate)
         val tvHour: TextView = itemView.findViewById(R.id.tvHour)
         val cbCheck: CheckBox = itemView.findViewById(R.id.cbDelete)

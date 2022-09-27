@@ -63,12 +63,12 @@ class HomeFragment : Fragment() {
         binding?.apply {
             ivPlayerVsCpu.setOnClickListener {
                 val vsCpu = Intent(requireContext(), AgainstComActivity::class.java)
-//                vsCpu.putExtra("USER_NAME", )
+
                 startActivity(vsCpu)
             }
             ivPlayerVsPlayer.setOnClickListener {
                 val vsPlayer = Intent(requireContext(), AgainstPlayerActivity::class.java)
-//                vsPlayer.putExtra("USER_NAME",)
+
                 startActivity(vsPlayer)
             }
         }

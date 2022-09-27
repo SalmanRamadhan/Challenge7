@@ -7,6 +7,12 @@
     tools:context=".landingpage.LandingPage"
     android:background="@color/maincolor">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_background"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="77dp" />
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"

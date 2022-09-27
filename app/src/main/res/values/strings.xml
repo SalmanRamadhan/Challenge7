@@ -49,4 +49,7 @@
     <string name="choice_rematch">Rematch?</string>
     <string name="choice_silahkan">%1$s Silahkan Pilih</string>
     <string name="player_2">PLayer 2</string>
+    <string name="mode_permainan_player_vs_player">Mode Permainan : Player Vs Player</string>
+    <string name="player_win">Player Win</string>
+    <string name="username_menang">Username Menang</string>
 </resources>

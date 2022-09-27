@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
                 response: Response<GetUserResponse>
             ) {
                 val respon = response.body()
-
+                println("pesan -> on Respons")
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
                         sharedPreferences.setStatusLogin(true)
@@ -86,10 +86,15 @@ class LoginFragment : Fragment() {
                         Toast.makeText(activity, "Email atau Password Salah", Toast.LENGTH_LONG)
                             .show()
                     }
+                } else {
+                    progressDialog.dismiss()
+                    Toast.makeText(activity, " 2 Email atau Password Salah", Toast.LENGTH_LONG)
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
+                println("pesan -> On Failure")
                     Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
             }
         })

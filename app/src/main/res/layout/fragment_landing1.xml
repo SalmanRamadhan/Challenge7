@@ -3,16 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/maincolor"
     tools:context=".landingpage.LandingFragment1">
 
-    <ImageView
-        android:id="@+id/ivBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_background"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="77dp" />
+
 
 
     <ImageView
