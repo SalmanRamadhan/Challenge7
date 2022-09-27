@@ -14,10 +14,6 @@ import com.example.challenge7.menu.MenuActivity
 
 class SettingActivity : AppCompatActivity() {
 
-    companion object {
-        var round: Int = 1
-    }
-
     private val SharedPreferences by lazy { SharedPreferences(this) }
 
     var binding: ActivitySettingBinding? = null
@@ -38,20 +34,24 @@ class SettingActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        setMusic()
         setOnCLickListener()
         setRound()
+        setMusic()
 
     }
 
     private fun setMusic() {
-        val music = binding?.sWSound?.isChecked
-        SharedPreferences.music = music == true
+        SharedPreferences.let {
+            binding?.sWSound?.isChecked = it.music == true
+            binding?.sWSound?.setOnCheckedChangeListener { _, isChecked ->
+                it.music = isChecked
+            }
+        }
     }
 
     private fun setRound() {
         //fill the game round
-        SharedPreferences?.let {
+        SharedPreferences.let {
             binding?.etGameRound?.setText(it.round.toString())
         }
     }
@@ -70,11 +70,11 @@ class SettingActivity : AppCompatActivity() {
         binding?.btnSave?.setOnClickListener {
             setMusic()
             if (isRoundFilled()) {
-                //save the round
-                SharedPreferences?.let {
+                //save changes
+                SharedPreferences.let {
                     it.round = binding?.etGameRound?.text.toString().toInt()
                 }
-                Toast.makeText(this, "Game Round Saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
                 val i = Intent(this, MenuActivity::class.java)
                 startActivity(i)
             } else {

@@ -61,14 +61,14 @@
         android:id="@+id/ivOpenPopMenu"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:clickable="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="60dp"
         android:layout_toEndOf="@id/pon"
+        android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_arrow_down"
-        app:tint="@color/optioncolor"
-        android:focusable="true" />
+        app:tint="@color/optioncolor" />
 
     <TextView
         android:id="@+id/tvUserName"
