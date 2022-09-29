@@ -1,6 +1,6 @@
 package com.example.challenge7.menu
 
-import android.app.Activity
+
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -42,10 +42,9 @@ class ProfileFragment : Fragment(), AddView {
         ProgressDialog(context)
     }
 
-    var addView: AddView? = null
     private val presenter: AddPresenterImpl by lazy {
 
-        AddPresenterImpl(addView)
+        AddPresenterImpl(this)
     }
     var binding: FragmentProfileBinding? = null
 

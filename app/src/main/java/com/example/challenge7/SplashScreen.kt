@@ -48,16 +48,15 @@ class SplashScreen : AppCompatActivity() {
             if (isAudio && i2 == 0) {
                 soundPool.play(i, 1f, 1f, 1, 0, 1f)
             }
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (sharedPreferences.getStatusLogin()) {
+                    startActivity(Intent(this, MenuActivity::class.java))
+                } else {
+                    startActivity(Intent(this, LandingPage::class.java))
+                }
+                finish()
+            }, 3000)
         }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (sharedPreferences.getStatusLogin()) {
-                startActivity(Intent(this, MenuActivity::class.java))
-            } else {
-                startActivity(Intent(this, LandingPage::class.java))
-            }
-            finish()
-        }, 3000)
 
     }
 
