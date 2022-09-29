@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class AddPresenterImpl(val view: AddView) : AddPresenterContract {
+class AddPresenterImpl(val view: AddView?) : AddPresenterContract {
 
     override fun fetchInputPosting(token: String) {
         NetworkHelper.instance.getUser("Bearer $token").enqueue(object :
@@ -23,18 +23,18 @@ class AddPresenterImpl(val view: AddView) : AddPresenterContract {
                 val dataJson = Gson().toJson(response.body(),GetUserProfileResponse::class.java)
 
                 if(response.code() == 200){
-                    view.addResultSuccess(dataJson)
-                    view.hideLoading()
+                    view?.addResultSuccess(dataJson)
+                    view?.hideLoading()
                 } else {
-                    view.addResultFailed("Data gagal tersimpan")
+                    view?.addResultFailed("Data gagal tersimpan")
                 }
             }
 
             override fun onFailure(call: Call<GetUserProfileResponse>, t: Throwable) {
                 if(t is IOException){
-                    view.addResultFailed("Koneksi bermasalah")
+                    view?.addResultFailed("Koneksi bermasalah")
                 } else {
-                    view.addResultFailed(t.message?:"")
+                    view?.addResultFailed(t.message?:"")
                 }
             }
         })

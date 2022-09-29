@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.challenge7.R
 import com.example.challenge7.api.NetworkHelper
 import com.example.challenge7.databinding.FragmentLoginBinding
+import com.example.challenge7.helper.NetworkConnection
 import com.example.challenge7.helper.SharedPreferences
 import com.example.challenge7.menu.MenuActivity
 import com.example.challenge7.model.GetUserResponse
@@ -31,7 +31,6 @@ class LoginFragment : Fragment() {
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +44,7 @@ class LoginFragment : Fragment() {
 
         binding?.tvSignUp?.setOnClickListener {
             val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-            fragmentTransaction?.add(((view as ViewGroup).parent as View).id,SignUpFragment())
+            fragmentTransaction?.add(((view as ViewGroup).parent as View).id, SignUpFragment())
             fragmentTransaction?.commit()
         }
 
@@ -66,33 +65,42 @@ class LoginFragment : Fragment() {
 
         validation(email, pass)
 
-        NetworkHelper.instance.login(email,pass).enqueue(object : Callback<GetUserResponse>{
-            override fun onResponse(
-                call: Call<GetUserResponse>,
-                response: Response<GetUserResponse>
-            ) {
-                val respon = response.body()
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                NetworkHelper.instance.login(email, pass)
+                    .enqueue(object : Callback<GetUserResponse> {
+                        override fun onResponse(
+                            call: Call<GetUserResponse>,
+                            response: Response<GetUserResponse>
+                        ) {
 
-                if (response.isSuccessful) {
-                    if (response.code() == 200) {
-                        sharedPreferences.setStatusLogin(true)
-                        sharedPreferences.setUser(respon?.data!!)
+                            val respon = response.body()
 
-                        startActivity(Intent(activity, MenuActivity::class.java))
-                        Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
-                        activity?.finish()
-                    } else {
-                        progressDialog.dismiss()
-                        Toast.makeText(activity, "Email atau Password Salah", Toast.LENGTH_LONG)
-                            .show()
-                    }
-                }
+                            println("pesan -> on Respons")
+                            if (response.isSuccessful) {
+                                    sharedPreferences.setStatusLogin(true)
+                                    sharedPreferences.setUser(respon?.data!!)
+
+                                    startActivity(Intent(activity, MenuActivity::class.java))
+                                    Toast.makeText(activity, "Berhasil Login", Toast.LENGTH_LONG).show()
+                                    activity?.finish()
+                            } else {
+                                progressDialog.dismiss()
+                                Toast.makeText(activity,"  Email atau Password Salah", Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
+                            println("pesan -> On Failure")
+                            Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
+                        }
+                    })
+            } else {
+                progressDialog.dismiss()
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
             }
-
-            override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
-                    Toast.makeText(activity, t.localizedMessage, Toast.LENGTH_LONG).show()
-            }
-        })
+        }
     }
 
     private fun validation(email: String, pass: String) {

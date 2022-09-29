@@ -20,14 +20,16 @@ class LandingFragment3 : Fragment() {
         binding.apply {
             btnLogin.setOnClickListener {
                 activity.let {
-                    val login = Intent (context, LoginActivity::class.java)
+                    val login = Intent (requireContext(), LoginActivity::class.java)
+                    login.putExtra("fragment", 1)
                     startActivity(login)
                 }
             }
 
             tvSignUp.setOnClickListener {
                 activity.let {
-                    val signUp = Intent (context, LoginActivity::class.java)
+                    val signUp = Intent (requireContext(), LoginActivity::class.java)
+                    signUp.putExtra("fragment", 2)
                     startActivity(signUp)
                 }
             }
